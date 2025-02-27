@@ -51,3 +51,12 @@ Refer program TestThread in this package
 2. you need to create an instance of countdownlatch and use methods wait and countdown to decrement the sequence.
 3. CountDownLatch is particularly useful in scenarios where you need to wait for a set of operations to 
     complete before proceeding. 
+
+**difference between wait,notify and notify all and sleep**
+-----------------------------------------------------------
+wait, notify and notifyall are object class method where sleep is thread class method
+
+**Thread Interruption**
+-----------------------
+Thread can be interrupted by using Thread.interrupt() method.
+Once thread is started by start method the same can be interrupted anytime.

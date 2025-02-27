@@ -62,3 +62,29 @@ Refer the program below
       }
 }
 }
+
+**Join Method**
+---------------
+join method tells that unless t1 thread completes dont start.
+t1.start()---start t1
+t1.join()----dont start unless t1 ends
+
+
+**Synchronization can be achieved by 2 ways**
+-----------------------------------------------
+1. synchronized block(above program is using synchronized block)
+
+This type gives you more flexibility to put only the code which need to be synchronized 
+rather than synchronizing entire method. It implements lock on class object.
+
+2. synchronized method
+synchronizing entire method.
+
+**Thread Intercommunication**
+-----------------------------
+Thread can communicate themself via wait(), notify() and notifyall() method.
+refer [TestThread.java]() file for using wait , notify and notifyall method.
+
+
+
+

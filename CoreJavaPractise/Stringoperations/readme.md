@@ -57,3 +57,7 @@ System.out.println("Euality Check via equals intern operator===="+(string8==stri
 as same string is returned from pool
 
 
+**String several methods**
+---------------------------
+
+IndexOf - returns the index of char or substring first occurence in string
