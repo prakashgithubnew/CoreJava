@@ -15,8 +15,6 @@ Refer full program in [CompletableFutureProgram.java]()
     });
 or ExecutorServiceProgram.java
 
-Async in Spring Boot
----------------------
-In spring boot same can be achieved by using
-@Async annotation
+
+
 
