@@ -3,6 +3,7 @@ package CoreJavaPractise.Collection;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,40 @@ public class ArrayListExample {
         List<String> sortedReverseAlphabets = list.stream().sorted(Comparator.reverseOrder()).toList();
         System.out.println("Sorting in reverse Order");
         sortedReverseAlphabets.forEach(System.out::println);
+
+        //Filter and then sort
+        List<String> list3 = Arrays.asList("akash","prakash","abhinav","akshaj","aman","kapil");
+
+        System.out.println("Filter and Sorting"+list3.stream().filter(x->x.startsWith("a")).sorted().toList());
+
+
+        //Grouping By Designation
+        List<Employee> employees = Arrays.asList(
+                new Employee("prakash",45,"Manager"),
+                new Employee("akash",43,"Manager"),
+                new Employee("pramesh",45,"Senior Manager"),
+                new Employee("premal",45,"Consultant"),
+                new Employee("kapil",45,"Consultant"),
+                new Employee("mukut",45,"Senior Manager"),
+                new Employee("sameer",45,"Consultant")
+        );
+        Map<String,List<Employee>> multipleFieldsMapList = employees.stream().collect(
+                Collectors.groupingBy(Employee::getDesignation));
+        //Results By grouping by designation
+        multipleFieldsMapList.forEach((key,value)->{
+            System.out.println(key+"-"+value);
+        });
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

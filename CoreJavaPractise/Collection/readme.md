@@ -9,6 +9,18 @@ Time Complexity - O(n)
 Space Complexity - O(1)
 
 
+****HashMap****
+---------------
+Duplicate keys not allowed
+one Null key and many null value can be stored
+Internally uses Hashing (similar to Hashtable in Java).
+Not Synchronized (unlike Hashtable in Java) and hence faster for most of the cases.
+HashMap allows for efficient key-based retrieval, insertion, and removal with average O(1) time complexity.
+HashMaps are not ordered, which means that the order in which elements are added to the map is not preserved.
+HashMaps are not thread-safe, which means that if multiple threads access the same hashmap simultaneously, 
+    it can lead to data inconsistencies. If thread safety is required, ConcurrentHashMap can be used.
+Time Complexity O(1)
+Space Complexity O(n)
 
 **Java 8 Method reference**
 -----------------------------
@@ -25,7 +37,7 @@ for example for System.out.println we can write System.out::println
 3. It improves manageability of code - Benefit
 
 **Difference between collections and collection**
-Collection is interface whcih contains list,set and queue
+Collection is interface which contains list,set and queue
 Collections is utility class in java which provides methods like sorting , searching.
 
 
