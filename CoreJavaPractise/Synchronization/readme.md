@@ -27,9 +27,9 @@ Refer the program below
     }
     
     public void run() {
-    synchronized(PD) {
-    PD.printCount();
-    }
+        synchronized(PD) {
+        PD.printCount();
+        }
     System.out.println("Thread " +  threadName + " exiting.");
     }
     
@@ -84,6 +84,14 @@ synchronizing entire method.
 -----------------------------
 Thread can communicate themself via wait(), notify() and notifyall() method.
 refer [TestThread.java]() file for using wait , notify and notifyall method.
+
+wait, notify and notifyall exist in Object Class.
+
+**difference between thread start and run method**
+--------------------------------------------------
+start method is unpredicatable whcih thread will be given chnace to execute but when you call
+run method direct its synchronous method.
+
 
 
 

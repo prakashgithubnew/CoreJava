@@ -1,14 +1,12 @@
 package CoreJavaPractise.Threading;
 
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class TestThread {
+public class ScheduledExecutorService {
 
     public static void main(final String[] arguments) throws InterruptedException {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+        final java.util.concurrent.ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
         scheduler.scheduleAtFixedRate(new EvenNumber(), 2, 2, TimeUnit.SECONDS);
 

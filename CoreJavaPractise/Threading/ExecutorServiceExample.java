@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class ThreadPoolTest {
+public class ExecutorServiceExample {
 
     public static void main(final String[] arguments) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(3);

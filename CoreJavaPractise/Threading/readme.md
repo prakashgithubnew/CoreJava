@@ -12,10 +12,10 @@
    t3.join()
 
     2. Multithreading can be achieved by 2 ways.Extending the class with Thread and implementing by runnable interface.
-       Extending ny thread can be preferred as the object can use multiple methods yield and interrupt
+       Extending any thread can be preferred as the object can use multiple methods yield and interrupt
        which is not possible in case of runnable.
    3. Suppose you have 2 threads and you started both by using t1.start and t2.start and then you are using
-   t1.join and then t2.join.This will not synchonze threads to sun one after another because you started both together.
+   t1.join and then t2.join.This will not synchronize threads to run one after another because you started both together.
    To make it work one after another you need to use as below
    t1.start()
    t1.join()
@@ -32,18 +32,29 @@ you will need to use either synchronized block or method.
 -------------------------------
 ![img.png](img.png)
 
+1. New thread
+2. Runnable
+3. Block
+4. Wait
+5. Terminate
+
+
+
 **Thread scheduler** 
 ---------------------
 
 1. To schedule thread to run every 2 seconds till 10 seconds
-Use ScheduledExecutorService class and call scheduleAtFixedRate method to call Thread class where function is written
-Refer program TestThread in this package
+Use ScheduledExecutorService class and call scheduleAtFixedRate method to call Thread class where function 
+is written refer program TestThread in this package.
+Refer [ScheduledExecutorService.java]() file
 
 
 **Thread Pool**
 ---------------
 1.  Create pool of threads and use it when needed else put that in pool to future use.
-2.  Refer Program ThreadPoolTest.java for more reference
+2.  Refer Program [ExecutorServiceExample.java]() for more reference
+3. You can use ExecutorService and ThreadPoolExecutor class for the same
+
 
 **CountDownLatch**
 -------------------
