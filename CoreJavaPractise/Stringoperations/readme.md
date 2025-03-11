@@ -61,3 +61,14 @@ as same string is returned from pool
 ---------------------------
 
 IndexOf - returns the index of char or substring first occurence in string
+-starts with 0 and count
+
+    public class Main {
+    public static void main(String[] args) {
+    String myStr = "Hello";
+    System.out.println(myStr.indexOf("o"));
+    }
+    }
+
+Prints 4
+

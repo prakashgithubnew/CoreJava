@@ -75,8 +75,10 @@ Spring TestContext framework
 
     BeanFactory Container
 
-BeanFactory represents a basic IoC container which is a parent interface of ApplicationContext. BeanFactory uses Beans and their dependencies metadata to create and configure them at run-time. BeanFactory loads the bean 
-definitions and dependency amongst the beans based on a configuration file (XML) or the beans can be directly returned when required using Java Configuration.
+BeanFactory represents a basic IoC container which is a parent interface of ApplicationContext. 
+BeanFactory uses Beans and their dependencies metadata to create and configure them at run-time. 
+BeanFactory loads the bean definitions and dependency amongst the beans based on a configuration 
+file (XML) or the beans can be directly returned when required using Java Configuration.
 
     Sample code for using Bean-Factory
 
@@ -97,9 +99,13 @@ definitions and dependency amongst the beans based on a configuration file (XML)
 
     ApplicationContext Container
 
-This interface is designed on top of the BeanFactory interface. The ApplicationContext interface is the advanced container that enhances BeanFactory functionality in a more framework-oriented style. 
-While the BeanFactory provides basic functionality for managing and manipulating beans, often in a programmatic way, the ApplicationContext provides extra functionality like MessageSource, 
-Access to resources, Event propagation to beans, Loading of multiple (hierarchical) contexts etc. There are so many implementation classes that can be used such as ClassPathXmlApplicationContext, 
+This interface is designed on top of the BeanFactory interface. 
+The ApplicationContext interface is the advanced container that enhances BeanFactory 
+functionality in a more framework-oriented style. 
+While the BeanFactory provides basic functionality for managing and manipulating beans, 
+often in a programmatic way, the ApplicationContext provides extra functionality like MessageSource, 
+Access to resources, Event propagation to beans, Loading of multiple (hierarchical) contexts etc. 
+There are so many implementation classes that can be used such as ClassPathXmlApplicationContext, 
 FileSystemXmlApplicationContext, AnnotationConfigWebApplicationContext etc.
 
 **BeanFactory and Application Context Hierarchy**
@@ -447,7 +453,7 @@ Autowiring in the Spring framework can inject dependencies automatically. The Sp
 detects those dependencies specified in the configuration file and the relationship between the beans. 
 This is referred to as Autowiring in Spring.
 
-Modes of autowiring in Spring Boot
+**Modes of autowiring in Spring Boot**
 
 No
 byName
@@ -455,7 +461,99 @@ byType
 Constructor
 Autodetect - The autodetect mode uses two other modes for autowiring – constructor and byType.
 
+**Spring Batch**
+-----------------
+Components-
 
+ItemReader: Reads data from a source (e.g., a file or database).
+ItemProcessor: Processes the data (e.g., transforms or filters).
+ItemWriter: Writes the processed data to a destination.
 
+**Simple spring batch program**
+-------------------------------
 
+1. Create simple batch config file
+-----------------------------------
 
+       @Configuration
+       @EnableBatchProcessing
+       public class BatchConfig {
+       @Bean
+       public Job job(JobBuilderFactory jobBuilderFactory,
+       StepBuilderFactory stepBuilderFactory) {
+                return jobBuilderFactory.get("job")
+                    .start(step(stepBuilderFactory))
+                    .build();
+       }
+    
+    
+        @Bean
+        public Step step(StepBuilderFactory stepBuilderFactory) {
+            return stepBuilderFactory.get("step")
+                    .<String, String>chunk(10)
+                    .reader(reader())
+                    .processor(processor())
+                    .writer(writer())
+                    .build();
+        }
+    
+    
+        @Bean
+        public ItemReader<String> reader() {
+            return new SimpleItemReader();
+        }
+    
+    
+        @Bean
+        public ItemProcessor<String, String> processor() {
+            return new SimpleItemProcessor();
+        }
+    
+    
+        @Bean
+        public ItemWriter<String> writer() {
+            return new SimpleItemWriter();
+        }
+    }
+
+2. Create SimpleItemReader
+------------------------------
+
+    public class SimpleItemReader implements ItemReader<String> {
+    private String[] data = {"Alice", "Bob", "Charlie", "Diana"};
+    private int index = 0;
+        @Override
+        public String read() {
+            if (index < data.length) {
+                return data[index++];
+            }
+            return null; // End of data
+        }
+    }
+
+3. Create ItemProcessor
+-----------------------
+    public class SimpleItemProcessor implements ItemProcessor<String, String> {
+    @Override
+        public String process(String item) {
+            return item.toUpperCase(); // Convert item to uppercase
+        }
+    }
+
+4. Create Itemwriter
+---------------------
+       public class SimpleItemWriter implements ItemWriter<String> {
+       @Override
+           public void write(List<? extends String> items) {
+                items.forEach(System.out::println); // Print items to console
+           }
+       }
+
+5. Create spring batch run application
+--------------------------------------
+    @SpringBootApplication
+    public class BatchApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(BatchApplication.class, args);
+        }
+    }
