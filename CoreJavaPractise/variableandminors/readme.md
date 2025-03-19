@@ -4,15 +4,12 @@ Need not to initialize during declaration
 Since there are static variable which means specific to class and hence for all instances value will be 
 shared same
 Example
-Class A{
-static int g=10;
-A a = new A();
-a.g=20;/// now this will be the final value everywhere all instances because due to static
- 
 
-
-
-}
+    Class A {
+        static int g=10;
+        A a = new A();
+        a.g=20;/// now this will be the final value everywhere all instances because due to static
+    }
 
 Instance Variables - within class but non-static
 ------------------------------------------------
@@ -50,8 +47,8 @@ static method cannot be overrided by non static methods - compile time error
 non static methods cannot be overrided by static methods - Compile time error
 
 static methods are called depending on the class reference
-non static methods are called depending on the class object.
-static and non static variables can be accessed in the child class also 
+non-static methods are called depending on the class object.
+static and non-static variables can be accessed in the child class also 
 
 
 **When is the object created with new keyword?**
@@ -72,9 +69,8 @@ String d = “Interviewbit”;
 3
 
 **Where does the system stores parameters and local variables whenever a method is invoked?**
----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 stack
-
 
 **Static cannot be used for constructor. is this true?**
 ---------------------------------------------------------
@@ -109,7 +105,7 @@ Yes but private method defined in super class cannot be accessed in the subclass
         }
         public static void main(String[] args) {
             Base obj = new Derived();
-            obj.fun();
+            obj.fun(); //fun method is of type Base whose private method cannot be accessed outside
         }  
     }
 
@@ -119,4 +115,6 @@ this will give compile time error as fun method cannot be accessed by subclass o
 **can weaker access be given to overrided method in subclass?**
 --------------------------------------------------------------
 No never
+
+
 

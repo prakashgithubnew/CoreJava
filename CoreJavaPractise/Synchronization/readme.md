@@ -85,12 +85,13 @@ synchronizing entire method.
 Thread can communicate themself via wait(), notify() and notifyall() method.
 refer [TestThread.java]() file for using wait , notify and notifyall method.
 
-wait, notify and notifyall exist in Object Class.
+wait, notify and notifyAll exist in Object Class.
 
 **difference between thread start and run method**
 --------------------------------------------------
-start method is unpredicatable whcih thread will be given chnace to execute but when you call
+start method is unpredicatable which thread will be given chance to execute but when you call
 run method direct its synchronous method.
+
 
 
 

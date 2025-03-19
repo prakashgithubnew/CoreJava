@@ -2,7 +2,7 @@
 -------------------------
 
 * Use local variables and method parameters whenever possible, as they are allocated on the stack and have 
-* minimal impact on memory management.
+minimal impact on memory management.
  
 * Minimize object creation, especially in loops or frequently executed code paths, to reduce garbage 
 * collection overhead.
@@ -47,14 +47,13 @@ synchronization issues.
 
 example 1-
 
-One good example is to not create a database connection up front, but only just before you need to get data from the database.
+One good example is to not create a database connection up front, but only just before you need to get 
+data from the database.
 
 example 2-
 
 java.util.function.Supplier is a functional interface which is perfect example of Lazy Intializer 
 it's not called when u define but you call get function of it then it creates an object.
-
-
 
 **Avoid Using BigDecimal Class**
 ---------------------------------

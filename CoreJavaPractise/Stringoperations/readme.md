@@ -6,7 +6,7 @@
 3. String is thread safe , String buffer is thread safe but string builder is not thread safe.
 4. Performance is significant good for string and string builder as both are not synchronized.
 
-**Usages -** 
+**Usages** 
 ------------
 String -This is used when we want immutability.
 String Builder - This is used when Thread safety is not required.

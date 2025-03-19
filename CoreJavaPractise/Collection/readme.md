@@ -7,6 +7,9 @@ Implementation of List Interface
 if you provide capacity with 1 in arraylist still you can add more than 2 elements
 Time Complexity - O(n)
 Space Complexity - O(1)
+List.of()//creates Immutable list
+List.asList//creates Mutable list
+
 
 
 ****HashMap****
@@ -39,6 +42,37 @@ for example for System.out.println we can write System.out::println
 **Difference between collections and collection**
 Collection is interface which contains list,set and queue
 Collections is utility class in java which provides methods like sorting , searching.
+
+**Hashtable** 
+-------------
+
+Synchronized hence very slow
+
+**Stack**
+---------
+LIFO
+
+**Queue**
+---------
+FIFO
+
+**SET**
+-------
+UnOrdered collection of storing objects where duplicates cannot be stored
+
+**TreeSet**
+-----------
+Ordering is maintained but duplicates are not allowed
+
+**Vector**
+----------
+Thread Safe
+Allows Nulls: Can store null elements.
+
+
+
+
+
 
 
 

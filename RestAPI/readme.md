@@ -12,5 +12,16 @@ Rest API security
 rate limiting
 throttling
 logging and monitoring
+transforming the traffic
+route handlers
+centralized authorization and authentication
+
+****what is Idempotent and which method is idempotent****
+---------------------------------------------------------
+In REST APIs, idempotent HTTP methods include GET, HEAD, PUT, DELETE, and OPTIONS, meaning multiple 
+identical requests have the same effect as a single request.
+
+POST and PATCH:
+These methods are generally not idempotent,as repeated requests can lead to multiple resource creations or modifications, respectively
 
 

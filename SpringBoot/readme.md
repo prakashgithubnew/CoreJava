@@ -28,28 +28,27 @@ spring-boot-starter-parent - The spring-boot-starter-parent project is a special
                              instead of using multiple. 
 
 **@ComponentScan**
-        Spring Boot application scans all the beans and package declarations when the application initializes. 
-        You need to add the 
-        Annotation for your class file to scan your components added to your project.
+        Spring Boot application scans all the beans and package declarations when the application 
+        initializes. 
+        You need to add the annotation for your class file to scan your components added to your project.
 
 **@Component**
         To mark any bean as spring managed bean
 
-
-
 **What is the difference between @RestController and @Controller in Spring Boot?**
 
-* @Controller is used to mark classes as Spring MVC Controller where as @RestController annotation is a special controller used in 
-  RESTful Web services, and it’s the combination of @Controller and @ResponseBody annotation.
+* @Controller is used to mark classes as Spring MVC Controller where as @RestController annotation is 
+    a special controller used in RESTful Web services, and it’s the combination of @Controller and 
+    @ResponseBody annotation.
 
 * In @Controller, we need to use @ResponseBody on every handler method and In @RestController, 
   we don’t need to use @ResponseBody on every handler method.
-* in MAE we have used @RestController and have also given @GetMapping , @ResponseStatus
+  In MAE we have used @RestController and have also given @GetMapping , @ResponseStatus
 
 
 **What is an IOC container?**
 
-Spring IoC Container is the core of Spring Framework.It creates the objects, configures and assembles 
+Spring IoC Container is the core of Spring Framework. It creates the objects, configures and assembles 
 their dependencies, manages their entire life cycle. The Container uses Dependency Injection(DI) to 
 manage the components that make up the application. It gets the information about the objects from 
 a configuration file(XML) or Java Code or Java Annotations and Java POJO class. These objects are 
@@ -140,8 +139,7 @@ which helps you to get the value from DB/Service.
 * Setter Injection: The IOC container will inject the dependent bean object into the target bean object by calling the setter method.
 * Constructor Injection: The IOC container will inject the dependent bean object into the target bean object by calling the target bean constructor.
 * Field Injection: The IOC container will inject the dependent bean object into the target bean object by Reflection API.
-  Dependency injection promotes loose coupling and easier testing
-
+  Dependency injection promotes loose coupling and easier testing.
 
 Constructor dependency is preferred and recommended because it explicitly states all required dependencies
 at object creation, making code more readable, maintainable, and testable, while also enforcing that all 
@@ -557,3 +555,11 @@ ItemWriter: Writes the processed data to a destination.
             SpringApplication.run(BatchApplication.class, args);
         }
     }
+
+**Spring Boot Performance Optimization**
+-----------------------------------------
+1. Remove Inefficient code
+   Inefficient Code and Algorithms with worst time complexity O(n)
+2. Use asynchronous calls where ever it is necessary instead of synchronous calls as synchronous calls made performance impact 
+3. Slow Database Queries
+4. Use profiling tools to monitor if any threads are still active and of no usage. Those threads can be killed immediately.
