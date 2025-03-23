@@ -1,8 +1,23 @@
 package CoreJavaPractise.Collection;
 
+import java.util.Objects;
+
 public class Employee {
 
     private String name;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return age == employee.age && Objects.equals(name, employee.name) && Objects.equals(designation, employee.designation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, designation);
+    }
+
     private int age;
     private String designation;
 
@@ -20,6 +35,15 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", designation='" + designation + '\'' +
+                '}';
     }
 
     public String getDesignation() {

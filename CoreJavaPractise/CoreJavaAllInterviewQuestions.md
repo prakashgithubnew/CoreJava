@@ -164,3 +164,32 @@ Finance
     Initialize the variable or any object.
 
 
+**What is transient keyword or variable in java**
+
+    The transient keyword in Java is used to indicate that a particular field of a class should 
+    not be serialized.These variables are always ignored.
+    
+    E.G.
+    transient int k=20;
+    after seriralization
+    k becomes=0, value ignored
+
+    You can use password as transient because its sensitive data 
+
+**Can we serialize static variables in java**
+
+    Static Variable are not serialized in java hence the same value is gets printed after desrialization
+
+**Can transient static data can be serialized?**
+    
+    No making static data as transient will not make any difference
+
+**what is volatile keyword in java**
+
+    The volatile keyword in Java is used to mark a Java variable as 
+    “being stored in the main memory.”
+
+    Every thread that accesses a volatile variable will read it from the main memory 
+    and not from the CPU cache.
+
+**What happens when you try to access an element in a HashMap using a key that does not exist?**

@@ -1,14 +1,21 @@
 **ArrayList**
 -------------
-
 Duplicates allowed
 items would be stored same as added
 Implementation of List Interface
 if you provide capacity with 1 in arraylist still you can add more than 2 elements
-Time Complexity - O(n)
-Space Complexity - O(1)
+
+
+
+
+
+
+
+
 List.of()//creates Immutable list
 List.asList//creates Mutable list
+List list = Array.asList//will create immutable lost on which modification not allowed
+
 
 
 
@@ -22,8 +29,7 @@ HashMap allows for efficient key-based retrieval, insertion, and removal with av
 HashMaps are not ordered, which means that the order in which elements are added to the map is not preserved.
 HashMaps are not thread-safe, which means that if multiple threads access the same hashmap simultaneously, 
     it can lead to data inconsistencies. If thread safety is required, ConcurrentHashMap can be used.
-Time Complexity O(1)
-Space Complexity O(n)
+
 
 **Java 8 Method reference**
 -----------------------------

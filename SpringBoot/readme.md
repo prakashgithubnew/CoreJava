@@ -563,3 +563,71 @@ ItemWriter: Writes the processed data to a destination.
 2. Use asynchronous calls where ever it is necessary instead of synchronous calls as synchronous calls made performance impact 
 3. Slow Database Queries
 4. Use profiling tools to monitor if any threads are still active and of no usage. Those threads can be killed immediately.
+
+
+**Spring Boot Filters and Interceptors**
+----------------------------------------
+
+![img_1.png](img_1.png)
+
+    **Exact Use Case Where Filters Can Be Used, but Interceptors Cannot**
+    ---------------------------------------------------------------------
+
+    1. Authentication Before DispatcherServlet → When you need to authenticate requests globally, 
+        before they reach controllers.
+    2. Logging of Raw HTTP Requests/Responses → If you want to log the request body, method, 
+        or headers before Spring MVC processes it.
+    3. Compression (Gzip, Brotli) → To compress/decompress data at the Servlet layer.
+
+    **Exact Use Case Where Interceptors Can Be Used, but Filters Cannot**
+    ---------------------------------------------------------------------
+    1. Handling Authorization Based on Business Logic (e.g., checking user roles at a controller level).
+
+
+**CORS(cross origin request) in Spring**
+----------------------------------------
+CORS is a technique which determines if request is originated from genuine page or any malicious page 
+and restrict access to resources or backend APIs.
+This is needed usually in web application to secure access to APIs.
+
+    **Following is the sample program to allow only mentioned in the @CrossOrigin(origins = "http://example.com")**
+    ----------------------------------------------------------------------------------------------------------------
+
+    import org.springframework.web.bind.annotation.CrossOrigin;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.RestController;
+    
+    @RestController
+    public class ProductController {
+    
+        @CrossOrigin(origins = "http://example.com")
+        @GetMapping("/products")
+        public List<String> getProducts() {
+            return List.of("Laptop", "Smartphone", "Tablet");
+        }
+    }
+
+**Types of CORS**
+------------------
+
+1. specific domains
+   @CrossOrigin(origins = "http://example.com")
+2. specific method allowed from origin
+   @CrossOrigin(origins = "http://example.com", methods = {RequestMethod.GET, RequestMethod.POST})
+3. specific headers in the domain request
+   @CrossOrigin(origins = "http://example.com", allowedHeaders = {"Content-Type", "Authorization"})
+
+**How to determine from which domain the request is coming in spring**
+----------------------------------------------------------------------
+In filter class
+
+String origin = request.getHeader("Origin"); // Indicates the domain making the request (used in CORS requests).
+String referer = request.getHeader("Referer"); //Indicates the previous page the request was made from.
+String host = request.getHeader("Host"); 
+
+
+CORS should be configured in servlet filters than interceptors.
+
+
+
+
