@@ -16,13 +16,14 @@ Exception Can be divided in 2 forms
                 Checked exception must be handled using try-catch 
                     block or must be declared using throw keyword
                 Can be recovered
-**Examples** - IOException, SQLException, FileNotFoundException.
+**Examples** - IOException, SQLException, FileNotFoundException, ClassNotFound exception
 
 **Unchecked** - Unchecked exceptions are checked at run time.
                 Derived from RuntimeException
                 Cannot be recovered
 **Examples** - NullPointerException, ArrayIndexOutOfBoundsException, NullPointer Exception
 
+Noclassdeffounderror is am error not any exception
 
 
 Creating Custom Exceptions
@@ -97,6 +98,8 @@ Main Class
             }
         }
 }
+Checked Exception can be reovered
+Uncheckexception cannot be recovered.
 
 **Which Custom Exception to use and when**
 * If a client can reasonably be expected to recover from an exception, make it a checked exception. 
@@ -119,10 +122,11 @@ For example, before we open a file, we can first validate the input file name. I
 
 **Overriding and Overloading of exceptions**
 --------------------------------------------
-1. if any method in parent class is throwing any exception then in subclass overriding method cannot throw bigger exception, it can 
-   throw either same exception as in parent method or should not throw any exception.
-2. if any parent method is throwing any lower exception like NullPointerException then you can calling this method in child class in other method 
-   then this method can throw higher exception.
+1. if any method in parent class is throwing any exception then in subclass overriding method cannot 
+    throw bigger exception, it can throw either same exception as in parent method or should not throw 
+    any exception or can throw no exception.
+2. if any parent method is throwing any lower exception like NullPointerException then you can calling 
+   this method in child class in other method then this method can throw higher exception.
     For example below-
 
 public class ParentA {

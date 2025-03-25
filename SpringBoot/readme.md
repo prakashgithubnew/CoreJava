@@ -216,7 +216,7 @@ Field Injection - Just autowired annotation before the field
     This annotation eliminates the need for manual configuration of commonly used components like databases,
     web servers, and security.
 
-    you cna use @componentscan and @EnableAutoConfiguration together to manage dependencies.
+    you can use @componentscan and @EnableAutoConfiguration together to manage dependencies.
 
     Spring Currently supports @SpringBootApplication which includes all below
     @ComponentScan
@@ -258,6 +258,22 @@ Field Injection - Just autowired annotation before the field
                     It is a singleton per ServletContext, not per Spring ApplicationContext
 **@Autowired**
 ----------------
+
+**How Validation is happening in Spring**
+-----------------------------------------
+
+    Use jakarta Validation and below are the annotations which can be used-
+        @NotBlank
+        @Pattern
+        @Valid
+        @Min
+        @Max
+        @DecimalMax
+        @DecimalMin
+    
+    
+    Use Jackson jar for Models annotations
+        @JsonProperty
 
 
 **How does Spring Boot handles external configuration**
@@ -469,6 +485,8 @@ ItemWriter: Writes the processed data to a destination.
 
 **Simple spring batch program**
 -------------------------------
+Annotation used in Spring Batch Program
+
 
 1. Create simple batch config file
 -----------------------------------
@@ -627,6 +645,164 @@ String host = request.getHeader("Host");
 
 
 CORS should be configured in servlet filters than interceptors.
+
+
+
+**Spring JPA**
+--------------
+
+Hibernate is one example of ORM. In short, JPA is the interface while hibernate is the 
+implementation. 
+
+Spring Data JPA is not a JPA provider, it is a library/framework that adds an extra layer of 
+abstraction on the top of our JPA provider line Hibernate.
+
+**Common Annotation used in Spring JPA**
+------------------------------------------
+@Entity
+@Id
+@GeneratedValue -strategy = GenerationType.AUTO
+@Repository
+
+    Example -   @Repository
+                public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+                ArrayList<Employee> findAllEmployee();
+                }
+
+
+Below service class uses how to interact with Database
+
+    @Service
+    public class EmpServiceImpl implements EmpService {
+    @Autowired
+    EmployeeRepository employeeRepository;
+    
+    @Override
+    public ArrayList<Employee> findAllEmployee() {
+        return (ArrayList<Employee>) employeeRepository.findAll();
+    }
+  
+    @Override
+    public Employee findAllEmployeeByID(long id) {
+        Optional<Employee> opt = employeeRepository.findById(id);
+        if (opt.isPresent())
+            return opt.get();
+        else
+            return null;
+    }
+
+
+Using EntityManager
+
+EntityManager are useful when looking to create/run custom queries.
+
+
+Create Entity class
+
+        @Entity
+        public class User {
+        @Id
+        @GeneratedValue
+        private Long id;
+        private String name;
+        private String email;
+        // ...
+        }
+
+We don’t have direct access to the EntityManager in a JpaRepository, and therefore we need to create our own.
+
+    @PersistenceContext
+        private EntityManager entityManager;
+    
+    @Override
+    public User customFindMethod(Long id) {
+        return (User) entityManager.createQuery("FROM User u WHERE u.id = :id")
+        .setParameter("id", id)
+        .getSingleResult();
+    }
+
+
+**Using entity manager to run the queries**
+-------------------------------------------
+
+EM should be used to run any native queries
+e.g.
+
+Query query = em.createNativeQuery("SELECT * FROM users WHERE age > ?", User.class);
+
+query.setParameter(1, 30);
+
+List<User> users = query.getResultList();
+
+**Difference between EM(jpa) persist and spring data save**
+-----------------------------------------------------------
+
+EM persist is used to create new entity.This is governed by JPA Library
+
+save is used for creating or updating the record and its governed by spring data JPA
+
+**Lock Mechanism in Spring**
+-----------------------------
+
+Lock mechanism ensures the data consistency and manage concurrency in multithreaded and distributed
+environment.
+
+Spring provides 2 methods for Locking Mechanism
+
+**Pessimistic Locking**
+-----------------------
+
+1. lock is obtained on the resource ensuring no other process can access it.
+
+2. Once locked is released then only resource can be accessed by other process.
+
+1. Pessimistic Example
+
+    @Transactional
+    public void updateProduct(Long productId) {
+    Product product = entityManager
+    .createQuery("SELECT p FROM Product p WHERE p.id = :id", Product.class)
+    .setParameter("id", productId)
+    .setLockMode(LockModeType.PESSIMISTIC_WRITE)
+    .getSingleResult();
+    
+        product.setPrice(product.getPrice().add(BigDecimal.TEN));
+    }
+
+2. Optimistic Locking
+This can be achieved by adding one version in each attribute
+
+@Version
+
+Example:
+
+        @Entity
+        public class Student {
+    
+        @Id
+        private Long id;
+    
+        private String name;
+    
+        private String lastName;
+    
+        @Version
+        private Integer version;
+
+}
+
+While using it, each transaction that reads data holds the value of the version property.
+
+Before the transaction wants to make an update, it checks the version property again.
+
+If the value has changed in the meantime, an OptimisticLockException is thrown. Otherwise, the transaction commits the update and increments a value version property.
+
+
+
+
+
+
+
 
 
 
