@@ -1,7 +1,6 @@
-package CoreJavaPractise.Callback;
+package CoreJavaPractise.Threading;
 
 
-import java.io.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 

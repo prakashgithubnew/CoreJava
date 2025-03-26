@@ -1,4 +1,4 @@
-package CoreJavaPractise.Synchronization;
+package CoreJavaPractise.Threading;
 
 public class ThreadSyncTest2 {
 

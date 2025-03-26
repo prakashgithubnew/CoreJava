@@ -5,19 +5,9 @@ items would be stored same as added
 Implementation of List Interface
 if you provide capacity with 1 in arraylist still you can add more than 2 elements
 
-
-
-
-
-
-
-
 List.of()//creates Immutable list
 List.asList//creates Mutable list
 List list = Array.asList//will create immutable lost on which modification not allowed
-
-
-
 
 ****HashMap****
 ---------------
@@ -30,23 +20,11 @@ HashMaps are not ordered, which means that the order in which elements are added
 HashMaps are not thread-safe, which means that if multiple threads access the same hashmap simultaneously, 
     it can lead to data inconsistencies. If thread safety is required, ConcurrentHashMap can be used.
 
-
-**Java 8 Method reference**
------------------------------
-
-In java 8 we don't need to use the entire method or sub method call we can directly write 
-via method reference
-
-for example for System.out.println we can write System.out::println
-
-
-**Java Predicates**
-1. These are the functional Interfaces - Predicates/consumer/supplier
-2. These have only one abstract method
-3. It improves manageability of code - Benefit
-
 **Difference between collections and collection**
+---------------------------------------------------
+
 Collection is interface which contains list,set and queue
+
 Collections is utility class in java which provides methods like sorting , searching.
 
 **Hashtable** 
@@ -74,17 +52,3 @@ Ordering is maintained but duplicates are not allowed
 ----------
 Thread Safe
 Allows Nulls: Can store null elements.
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -797,6 +797,145 @@ Before the transaction wants to make an update, it checks the version property a
 
 If the value has changed in the meantime, an OptimisticLockException is thrown. Otherwise, the transaction commits the update and increments a value version property.
 
+**Session Management in Spring Boot**
+-------------------------------------
+
+session can be managed in spring boot by below methods
+1. By default by scopes = session by storing in memory using HTTP Session
+
+2. By storing session in database
+
+3. By using distributed session mechanism Redis.
+
+**1. By default by scopes = session by storing in memory**
+----------------------------------------------------------
+* when first time request is made to server from browser server creates a session
+    using HTTPSession and put in setAttribute.
+
+    
+    Example
+
+      @GetMapping("/create")
+      public String createSession(HttpSession session) {
+      // Set a session attribute (e.g., username)
+      session.setAttribute("username", "JohnDoe");
+        // Retrieve and return the session ID
+        String sessionId = session.getId();
+        return "Session created with ID: " + sessionId;
+  }
+
+
+
+* This id is sent back to browser in a cookie called sessionId
+
+* On subsequent request this same session id is sent back from browser to server to retrieve session data
+
+    @GetMapping("/get")
+    public String getSession(HttpSession session) {
+    // Get the session attribute (username)
+    String username = (String) session.getAttribute("username");
+        // If no session exists, return an error message
+        if (username == null) {
+            return "No session found!";
+        }
+        // Return session data to the client
+        return "Session found with username: " + username;
+    }
+
+
+this session is stored in server and hence if server starts this session data is lost.
+
+**2. By storing session in database
+-----------------------------------
+
+store data in JDBC same as above
+
+Additional Properties
+
+spring.session.store-type=jdbc - In config file
+
+maven.xml file
+
+<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
+
+All sessions are stored against the sessionid created at the backend. Once this session id is 
+created its the same which is returned back to client and when again request is coming the same client can
+be identified.
+
+session id came in cookie for the second time and for the first time it will not come so generate for first
+time request.
+
+**3. By using distributed session mechanism Redis.**
+----------------------------------------------------
+Redis allows multiple application instances to share session data, 
+making it ideal for cloud-based or microservices architectures.
+
+
+**what is sticky session**
+--------------------------
+
+A sticky session (also known as session affinity) is a technique used in load balancing, 
+where a user's session is consistently directed to the same server for the duration of the session. 
+This is done to ensure that requests from the same user are always handled by the same server, 
+which is crucial for applications that store session-specific data locally (such as user login 
+information or shopping cart contents).
+
+Here’s how it works:
+
+When a user makes a request, the load balancer assigns that request to a specific server, and a session ID (usually stored in a cookie) is tied to that server.
+
+On subsequent requests, the load balancer uses that session ID to ensure the requests go to the same server that handled the initial request.
+
+This helps maintain session consistency and prevents data loss or errors, particularly in scenarios like shopping carts or user profiles.
+
+**Spring Boot Transaction Handling**
+---------------------------------------
+Transactions are needed in case we are performing 
+we can handle transactions in multiple ways-
+
+    **1. Declarative** -
+    -------------------
+
+* Only annotations can be used
+* @Transactional ensures that either all database operations complete successfully, 
+  or none of them persist (rollback on failure).
+* Enable the transaction in config class
+
+      @Configuration
+      @EnableTransactionManagement
+      public class AppConfig {
+      // other bean definitions
+      }
+
+  @Transactional - In service class
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
+
+    REQUIRED (default) – Uses an existing transaction or creates a new one.
+    
+    REQUIRES_NEW – Suspends the current transaction and creates a new one.
+    
+    MANDATORY – Requires an active transaction; fails if none exists.
+    
+    SUPPORTS – Uses an existing transaction if available; otherwise, executes without one.
+    
+    NOT_SUPPORTED – Executes outside of any transaction.
+    
+    NEVER – Fails if a transaction exists.
+    
+    NESTED – Creates a nested transaction within the existing one.
+
+
+
+
+
+
 
 
 

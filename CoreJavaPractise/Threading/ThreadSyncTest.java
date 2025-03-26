@@ -1,4 +1,4 @@
-package CoreJavaPractise.Synchronization;
+package CoreJavaPractise.Threading;
 
 /**
  * This program demonstrate the use of join method to execute in sync one after another.

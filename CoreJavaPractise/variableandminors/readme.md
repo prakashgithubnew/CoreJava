@@ -1,9 +1,10 @@
 Class Variables or Static Variable within class
 ----------------------------------------------
 Need not to initialize during declaration
-Since there are static variable which means specific to class and hence for all instances value will be 
-shared same
-Example
+Since there are static variable which means specific to class and hence for all instances value will
+be shared same
+
+    Example
 
     Class A {
         static int g=10;
@@ -16,18 +17,15 @@ Instance Variables - within class but non-static
 Need not initialize during declaration
 the values are specific to each instances
 
-
-
-
 Local Variable - within method, constructor or block
 -----------------------------------------------------
 local variable need to be initialized , won't take default values.
-declaring local variable int g; is fine but when we use it will give error not initialized
-
+declaring local variable int g; is fine but when we use it will give error if not initialized
 
 **Final Variables**
 -------------------
 Final Variable has to be initialized else error
+
 Non static field cannot be accessed in static context, either you define it static or access by creating
 an object of the class
 
@@ -75,7 +73,7 @@ stack
 **Static cannot be used for constructor. is this true?**
 ---------------------------------------------------------
 Constructor can be private,protected or public but not static
-
+Constructors cannot be final or static
 
 **What is the implicit return type of constructor?**
 -----------------------------------------------------
@@ -84,7 +82,6 @@ Implicit return type of constructor is the class object in which it is defined.
 **When is the finalize() method called?**
 -------------------------------------------
 Before Garbage collection
-
 
 **Can private method be overrided?**
 --------------------------------------
@@ -111,10 +108,23 @@ Yes but private method defined in super class cannot be accessed in the subclass
 
 this will give compile time error as fun method cannot be accessed by subclass object
 
-
 **can weaker access be given to overrided method in subclass?**
 --------------------------------------------------------------
 No never
+
+**Can a private method in super class be overrided in child class by public method.**
+-------------------------------------------------------------------------------------
+yes but super class method will not be visible in child class due to its private.
+
+**Difference between static and volatile**
+-------------------------------------------
+Static are more towards class level where any change will be reflected to every object/instance of that class.
+
+Volatile is itself reflected for multithreading where all threads will share the latest value of variable
+as the variable resides at main memory.
+
+
+
 
 
 

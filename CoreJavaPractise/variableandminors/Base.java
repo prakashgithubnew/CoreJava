@@ -2,7 +2,7 @@ package CoreJavaPractise.variableandminors;
 
 class Base {
 
-    public void fun() {
+    private void fun() {
         System.out.println("Base fun");
     }
 
