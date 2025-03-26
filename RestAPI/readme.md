@@ -129,3 +129,96 @@ public void show(){
 }
 }
 
+**What are the rest API standards**
+----------------------------------
+**1. HTTP Methods (CRUD Operations):**
+   REST APIs use standard HTTP methods to perform CRUD (Create, Read, Update, Delete) operations:
+
+GET: Retrieve data from the server (Read operation).
+
+POST: Send data to the server (Create operation).
+
+PUT: Update data on the server (Replace operation).
+
+PATCH: Partially update data on the server (Partial Update).
+
+DELETE: Remove data from the server (Delete operation).
+
+**2. Uniform Resource Identifier (URI):**
+   REST APIs use clear and consistent URIs to identify resources.
+
+Singular vs Plural: Resources should be named in plural form (e.g., /users, /posts).
+
+Hierarchical Structure: Use nested URIs to represent relationships (e.g., /users/{userId}/posts).
+
+Avoid Actions: Avoid using verbs in URIs (e.g., use /users instead of /getUsers).
+
+**3. Stateless:**
+   Each API call should contain all the information needed to complete the request. The server should not store any session data between requests. Every request is independent and self-contained.
+
+**4. Response Format:**
+   JSON (preferred): JSON is the most widely used data format for REST APIs because it’s lightweight and easy to parse. XML is also an option, but JSON is the standard.
+
+HTTP Status Codes: REST APIs should use standard HTTP status codes to indicate the outcome of the request:
+
+200 OK: Successful request.
+
+201 Created: Resource created successfully.
+
+400 Bad Request: Invalid request from the client.
+
+401 Unauthorized: Client is not authorized.
+
+403 Forbidden: Access to the resource is forbidden.
+
+404 Not Found: The requested resource was not found.
+
+500 Internal Server Error: Server encountered an error.
+
+**5. Request Headers:**
+   REST APIs use request headers for various purposes, such as:
+
+Content-Type: Specifies the media type of the resource (e.g., application/json).
+
+Authorization: Used for authentication (e.g., Bearer {token}).
+
+Accept: Indicates the expected response format (e.g., application/json).
+
+**6. Versioning:**
+   It's important to version your API so that changes don't break existing clients. This can be done in various ways:
+
+URI Versioning: /api/v1/users.
+
+Query Parameter Versioning: /api/users?version=1.
+
+Header Versioning: Accept: application/vnd.myapi.v1+json.
+
+**7. Pagination:**
+   For large datasets, it's important to paginate the response:
+
+Use query parameters like ?page=1&limit=20 or ?offset=0&limit=10.
+
+**8. HATEOAS (Hypermedia as the Engine of Application State):**
+   HATEOAS is a constraint of REST that allows clients to navigate the API dynamically by providing links to related resources in the response. This is often represented in a links section of the response.
+
+**9. Error Handling:**
+   REST APIs should return clear error messages with relevant status codes and details:
+
+Include an error code, a description, and possibly a more specific message (e.g., {"error": {"code": "400", "message": "Invalid user ID"}}).
+
+**10. Security:**
+    Authentication: Use OAuth, JWT (JSON Web Tokens), or API keys for authentication.
+
+Authorization: Make sure that users can only access resources they are permitted to.
+
+HTTPS: Always use HTTPS to encrypt API communication.
+
+**11. Idempotency:**
+    Some requests (like GET, PUT, and DELETE) should be idempotent, meaning that making the same request multiple times should produce the same result without causing side effects.
+
+**12. Caching:**
+    REST APIs can benefit from caching to reduce the number of requests:
+
+Use HTTP caching headers like Cache-Control, ETag, and Last-Modified.
+
+Enable server-side or client-side caching for frequently accessed resources.
