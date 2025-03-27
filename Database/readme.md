@@ -43,6 +43,11 @@ Count * counts null also
 
 **What is the difference between DELETE and TRUNCATE?**
 -------------------------------------------------------
+delete can delete the records using where clause where as truncate can delete all records at one go.
+
+Truncate is faster than delete.
+
+
 
 
 

@@ -909,7 +909,7 @@ we can handle transactions in multiple ways-
 * Enable the transaction in config class
 
       @Configuration
-      @EnableTransactionManagement
+      @EnableTransactionManagement - if this annotation is not used then rollback will not happen
       public class AppConfig {
       // other bean definitions
       }
@@ -930,6 +930,22 @@ we can handle transactions in multiple ways-
     NEVER – Fails if a transaction exists.
     
     NESTED – Creates a nested transaction within the existing one.
+
+
+**what is the use of this property below?**
+-------------------------------------------
+spring.jpa.hibernate.ddl-auto=update/create-drop/validate/create/
+
+this property is essential for auto managing the DB Schemas.
+
+Create - it will drop the current schema and create new one always
+
+Update - automaticallu update the schema based on the models defined.
+
+Validate - It will validate whether entity models match with schema.Used mainly in production. 
+
+Create-drop - will create and drop after use.
+
 
 
 
