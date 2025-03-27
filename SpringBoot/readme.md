@@ -1044,6 +1044,15 @@ Which one are you using in your project?
 
 
 
+=======================================
+
+how to use circuit breaker in spring boot
+
+Spring Boot provides Circuit Breaker functionality using Resilience4j (recommended) or Hystrix (deprecated). Below is a step-by-step guide to implementing a Circuit Breaker in a Spring Boot application using Resilience4j.
+
+
+
+
 
 
 
