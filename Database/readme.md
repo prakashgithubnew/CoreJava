@@ -29,9 +29,20 @@ WHERE salary < (SELECT MAX(salary) FROM employees);
 
 SELECT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 2;
 
-This query orders the salary column in descending order, skips the first two highest values (using OFFSET 2), 
-and retrieves the third highest.
+This query orders the salary column in descending order, skips the first two highest values 
+(using OFFSET 2),and retrieves the third highest.
 
+
+**How do you count the number of records in a table without using COUNT(*)**
+----------------------------------------------------------------------------
+SELECT COUNT(id) FROM your_table;
+
+**Difference between Count(*) and count() in oracle**
+-----------------------------------------------------
+Count * counts null also
+
+**What is the difference between DELETE and TRUNCATE?**
+-------------------------------------------------------
 
 
 

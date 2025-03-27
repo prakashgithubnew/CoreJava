@@ -1,16 +1,14 @@
 package CoreJavaPractise.java8practise;
 
-final class example {
+public class example {
 
-
+     int g;
     public static void main(String[] args){
-        int g=10;
-        System.out.println("show");
-        new example().show();
+
+        System.out.println("show"+new example().g);
+
     }
 
 
-    void show(){
-        int h=10;
-    }
+
 }

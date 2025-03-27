@@ -1,11 +1,11 @@
 **Optimize Memory Usage**
 -------------------------
 
-* Use local variables and method parameters whenever possible, as they are allocated on the stack and have 
-minimal impact on memory management.
+* Use local variables and method parameters whenever possible, as they are allocated on the 
+  stack and have minimal impact on memory management.
  
 * Minimize object creation, especially in loops or frequently executed code paths, to reduce garbage 
-* collection overhead.
+  collection overhead.
 
 * Use the String.intern() method to share instances of equal string literals, reducing memory footprint.
 

@@ -53,7 +53,7 @@ Static        only static inner class               yes only instance variable  
 Final              Yes                              yes                                        yes
 
 Final and static are the keywords in java
-
+Local variable cannot be static as it will give compile time error.
 =========================================================================================
 
 **Java Utilizes this memory as -**
@@ -218,7 +218,7 @@ Finance
 **Instance, Local Variables**
 
     Instance variable can be defined in class where as Local can be defined in method , blocks or constructors
-    Instance varaibles need not to define, they take default values.
+    Instance or class(static) varaibles need not to define, they take default values.
     Local variable need to be defined , they wont take default values.
     All final variable need to be initialized.
 
@@ -289,6 +289,28 @@ Object are passed as copy as reference
 Strings are immutable hence passed by value.
 
 All objects are passed by reference and will change the value except String.
+
+**which variable will you define as static or volatile in java**
+-----------------------------------------------------------------
+
+Static variable are related to Class and its value is shared to all objects but if 2 threads
+are accessing the static variable then if value is changed by 1 thread then the updated value is not reflected
+in 2nd thread due to static.
+
+Volatile are stored in RAM and its value is shared by all thread of every object. so if any object is accessible by 
+2 threads and if any thread chnages the value then it will be reflcted in 2nd thread also whcih waa the case for static.
+
+    Real use case of static -
+
+When creating a Singleton pattern.
+
+For utility/helper methods that do not depend on instance variables.
+
+    Real use case of static
+
+When multiple threads read and write a shared variable.
+
+
 
 
 
