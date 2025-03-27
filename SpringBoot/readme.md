@@ -947,6 +947,101 @@ Validate - It will validate whether entity models match with schema.Used mainly 
 Create-drop - will create and drop after use.
 
 
+≈====================================
+
+Running native queries in spring 
+
+In Spring, you can run native SQL queries using Spring Data JPA or JdbcTemplate. Here’s how you can do it:
+
+
+---
+
+1. Using @Query Annotation in Spring Data JPA
+
+You can use @Query with nativeQuery = true in a JPA Repository.
+
+Example:
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    @Query(value = "SELECT * FROM users WHERE email = ?1", nativeQuery = true)
+    User findByEmail(String email);
+}
+
+Here, nativeQuery = true tells Spring Data JPA to treat it as a raw SQL query.
+
+
+
+---
+
+2. Using EntityManager and createNativeQuery
+
+You can also use EntityManager to execute native queries.
+
+Example:
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UserDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
+    public User getUserByEmail(String email) {
+        return (User) entityManager.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class)
+                                   .setParameter(1, email)
+                                   .getSingleResult();
+    }
+}
+
+
+---
+
+3. Using JdbcTemplate
+
+If you're working directly with JDBC, use JdbcTemplate.
+
+Example:
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public class UserJdbcRepository {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<User> getAllUsers() {
+        String sql = "SELECT * FROM users";
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new User(rs.getLong("id"), rs.getString("name"), rs.getString("email")));
+    }
+}
+
+
+---
+
+When to Use What?
+
+Spring Data JPA (@Query) → Best for simple queries with repositories.
+
+EntityManager → When you need more flexibility.
+
+JdbcTemplate → When performance is critical, and you don’t need entity mappings.
+
+
+Which one are you using in your project?
+
 
 
 
