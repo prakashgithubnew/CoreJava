@@ -1,4 +1,4 @@
-package CoreJavaPractise.Collection;
+package CoreJavaPractise.java8practise.MultipleFilters;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class Employee {
 
     private String name;
 
-    private int age;
+    private String age;
 
     private String designation;
 
@@ -18,11 +18,11 @@ public class Employee {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -43,7 +43,7 @@ public class Employee {
         this.designation = designation;
     }
 
-    public Employee(String name, int age, String designation) {
+    public Employee(String name, String age, String designation) {
         this.name = name;
         this.age = age;
         this.designation = designation;

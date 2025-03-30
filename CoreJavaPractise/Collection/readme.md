@@ -1,16 +1,15 @@
 **ArrayList**
 -------------
 Duplicates allowed
-
 items would be stored same as added
-
 Implementation of List Interface
-
+uses dynamic array
 if you provide capacity with 1 in arraylist still you can add more than 2 elements
 
 List.of()//creates Immutable list
 List.asList//creates Mutable list
 List list = Array.asList//will create immutable lost on which modification not allowed
+ArrayList takes more memory as it stores the elements directly
 
 ****HashMap****
 ---------------
@@ -63,3 +62,8 @@ Treemap keeps the elements in sorted order(increasing order) and also maintains 
 unique elements
 
 
+**LinkedList()**
+----------------
+ArrayList and LinkedList both are List implementation only.
+LinkedList uses double linked list for managing the elements
+Linkedlist does not take more memory as it stores objects references.

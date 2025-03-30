@@ -49,18 +49,18 @@ Intern create/add the string in String pool and return reference of it.
 
 String string8 = new String("Vikas");
 String string9 = "Vikas";
-System.out.println("Euality Check via equals intern operator===="+(string8==string9));//prints false
+System.out.println("Equality Check via equals intern operator===="+(string8==string9));//prints false
 
 String string8 = new String("Vikas").intern();
 String string9 = "Vikas";
-System.out.println("Euality Check via equals intern operator===="+(string8==string9));//prints true 
+System.out.println("Equality Check via equals intern operator===="+(string8==string9));//prints true 
 as same string is returned from pool
 
 
 **String several methods**
 ---------------------------
 
-IndexOf - returns the index of char or substring first occurence in string
+IndexOf - returns the index of char or substring first occurrence in string
 -starts with 0 and count
 
     public class Main {

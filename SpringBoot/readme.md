@@ -460,6 +460,99 @@ you should use @Bean Annotation in below conditions
     Conditional bean creation: You may want to create a bean conditionally — only under certain 
     circumstances. This is easily done with a @Bean method.
 
+    This Annotation can be used in method only and auto scanning is not needed.
+    This annotation can be used when you want manual creation of bean.
+    This annotation can be used in Configuraiton class to regsiter any TP bean manually.
+    This annotation can be used where Resttemplte is used whihc is a TP.
+    This annotation is used in MAE for loading jakarta validator(TP) in Configuration Class.
+    the class referred as @Bean are loaded in ApplicationContext.
+
+
+    Example:
+
+    Program 1:
+
+        public class MyService {
+        public String serve() {
+            return "Hello from MyService!";
+        }
+    }
+
+    Program 2:
+    
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    
+    @Configuration
+    public class AppConfig {
+    
+        @Bean
+        public MyService myService() {
+            return new MyService();  // Manually creating a Spring bean
+        }
+    }
+
+    Program3:
+
+    @SpringBootApplication
+    public class MyApp implements CommandLineRunner {
+    
+        @Autowired
+        private MyService myService;
+    
+        public static void main(String[] args) {
+            SpringApplication.run(MyApp.class, args);
+        }
+    
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println(myService.serve());  // Output: Hello from MyService!
+        }
+    }
+
+    
+**Use Cases and Example where @Bean can be used**
+-------------------------------------------------
+For TP class to get loaded to application context with manual configuration.
+
+**How would you load any bean of same type**
+--------------------------------------------
+
+@Bean(Qualifirename=") 
+or 
+@Bean
+@Primary - for opting as default choice
+
+if Qualifiername is not used then primary annotation comes in to picture to take as default.
+
+
+Consider an example below
+
+Program 1:
+
+    @Configuration
+    public class AppConfig {
+
+    @Bean
+    @Primary
+    public DataSource dataSource1() {
+        return new HikariDataSource();
+    }
+
+    @Bean
+    public DataSource dataSource2() {
+        return new BasicDataSource();
+    }
+}
+
+
+or use
+
+    @Autowired
+    @Qualifier("dataSource2")
+    private DataSource dataSource;
+
+
 **@Autowiring in spring boot**
 ------------------------------
 
@@ -1031,7 +1124,8 @@ public class UserJdbcRepository {
 
 ---
 
-When to Use What?
+**When to Use What?**
+---------------------
 
 Spring Data JPA (@Query) → Best for simple queries with repositories.
 
@@ -1042,14 +1136,19 @@ JdbcTemplate → When performance is critical, and you don’t need entity mappi
 
 Which one are you using in your project?
 
-
-
 =======================================
 
-how to use circuit breaker in spring boot
+**how to use circuit breaker in spring boot**
+---------------------------------------------
 
-Spring Boot provides Circuit Breaker functionality using Resilience4j (recommended) or Hystrix (deprecated). Below is a step-by-step guide to implementing a Circuit Breaker in a Spring Boot application using Resilience4j.
+Spring Boot provides Circuit Breaker functionality using Resilience4j (recommended) or 
+Hystrix (deprecated). Below is a step-by-step guide to implementing a Circuit Breaker in a 
+Spring Boot application using Resilience4j.
 
+**What is spring profile and how it is used?**
+----------------------------------------------
+
+it is used to load environment specific configurations from properties file or yml file
 
 
 

@@ -124,6 +124,35 @@ Volatile is itself reflected for multithreading where all threads will share the
 as the variable resides at main memory.
 
 
+=====================================================
+
+**Abstract Class**
+-------------------
+
+1. Abstract class cannot be instantiated. if Demo is abstract class then below will be compile time errro
+Demo demo = new Demo();
+
+2. if you have created 2 abstract classes and you have created a class whcih extends both abstract class then 
+that class need to implement both the abstract method.
+
+================================================================
+
+Class1 {
+    void show(){}
+}
+
+Class2 extends Class1 {
+void show(){}
+}
+
+if you put methods as above or mark as static it will work.
+
+
+
+
+
+
+
 
 
 

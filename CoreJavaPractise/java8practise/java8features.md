@@ -80,6 +80,47 @@ to maintain.
 **ParallelStream for Big List of Data**
 ---------------------------------------
 
+    By default, any stream operation in Java is processed sequentially, unless explicitly specified 
+    as parallel.
+
+    List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4);
+    listOfNumbers.stream().forEach(number ->
+    System.out.println(number + " " + Thread.currentThread().getName())
+    );
+
+    The output of this sequential stream is predictable. The list elements will always be 
+    printed in an ordered sequence.
+
+    Parallel streams enable us to execute code in parallel on separate cores. 
+    The final result is the combination of each individual outcome.
+
+====================================================
+
+**Yield in Switch statement**
+-----------------------------
+The yield keyword lets us exit a switch expression by returning a value that becomes the value of 
+the switch expression.
+
+Example
+
+    return switch (arg) {
+    case "Designation" -> {
+    filterManagement = new EmployeeDesignationFilterImpl();
+    yield filterManagement.doFilter(value);
+    }
+    case "Age" -> {
+    filterManagement = new EmployeeAgeFilterImpl();
+    yield filterManagement.doFilter(value);
+    }
+    default -> null;
+    };
 
 
+=================================================================================
+
+**Difference between Predicate and BiPredicate**
+-------------------------------------------------
+
+Predicate works on one value
+BiPredicate works on 2 values
 
