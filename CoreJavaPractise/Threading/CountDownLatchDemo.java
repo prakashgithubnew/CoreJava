@@ -21,12 +21,15 @@ public class CountDownLatchDemo
                 "WORKER-3");
         Worker fourth = new Worker(4000, latch,
                 "WORKER-4");
+        ThreadEx thread = new ThreadEx();
         first.start();
         second.start();
         third.start();
 
         fourth.start();
         latch.await();
+
+        thread.start();
 
         // The main task waits for four threads
 
@@ -63,6 +66,16 @@ public class CountDownLatchDemo
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    static class ThreadEx extends Thread{
+
+        @Override
+        public void run(){
+            System.out.println("Thread is going to sleep");
+
         }
     }
 }

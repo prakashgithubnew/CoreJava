@@ -1,6 +1,6 @@
 Class Variables or Static Variable within class
 ----------------------------------------------
-Need not to initialize during declaration
+Need not to initialize during declaration.They will take default values.
 Since there are static variable which means specific to class and hence for all instances value will
 be shared same
 
@@ -14,17 +14,17 @@ be shared same
 
 Instance Variables - within class but non-static
 ------------------------------------------------
-Need not initialize during declaration
+Need not initialize during declaration.They will take default values.
 the values are specific to each instances
 
 Local Variable - within method, constructor or block
 -----------------------------------------------------
-local variable need to be initialized , won't take default values.
+local variable also need not to be initialized but when its used anywhere it will ask to initialize first , won't take default values.
 declaring local variable int g; is fine but when we use it will give error if not initialized
 
 **Final Variables**
 -------------------
-Final Variable has to be initialized else error
+Final Variable has to be initialized else error everywhere.
 
 Non static field cannot be accessed in static context, either you define it static or access by creating
 an object of the class
@@ -132,8 +132,8 @@ as the variable resides at main memory.
 1. Abstract class cannot be instantiated. if Demo is abstract class then below will be compile time errro
 Demo demo = new Demo();
 
-2. if you have created 2 abstract classes and you have created a class whcih extends both abstract class then 
-that class need to implement both the abstract method.
+2. if you have created 2 abstract classes and you have created a class whcih extends both 
+abstract class then that class need to implement both the abstract method.
 
 ================================================================
 
@@ -148,6 +148,63 @@ void show(){}
 if you put methods as above or mark as static it will work.
 
 
+=================================
+
+**Constructor Calling Hierarchy**
+---------------------------------
+    Base1 {
+        Base1(){
+        }
+        Base1(int b){
+        }
+    }
+
+    Base2 extends Base1 {
+        Base2(){
+        }
+        Base2(int b){
+        }
+    }
+
+    Base3 extends Base2 {
+        Base3(){
+        }
+    
+        Base3(int h){
+        }
+
+        PSVM(){
+        Base3 base3  =  new Base3(10);//it will call Base1 and Base2 default contructor and Base3 argument contructor
+        }
+    }
+
+================================
+
+
+**Data Types in Java and their ranges**
+----------------------------------------
+Primitive data types
+
+    byte - -128 to 127 1 byte
+    short - 2 byte
+    int - 4 byte
+    long - 8 byte
+    float - 4 byte
+    double - 8 byte
+    char - 2 bytes, 0 to 65536
+    boolean - 0 or 1 - 1 byte or 2 byte
+
+Non primitive data types 
+
+String
+Array
+Interfaces
+ENUM
+
+==============
+
+String has method length for size
+Array has length
 
 
 

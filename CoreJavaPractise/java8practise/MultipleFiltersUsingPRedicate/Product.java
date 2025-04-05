@@ -1,4 +1,4 @@
-package CoreJavaPractise.java8practise.MultipleFilters;
+package CoreJavaPractise.java8practise.MultipleFiltersUsingPRedicate;
 
 class Product {
     String name;

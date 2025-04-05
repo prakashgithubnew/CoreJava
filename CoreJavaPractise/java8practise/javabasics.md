@@ -306,12 +306,38 @@ When creating a Singleton pattern.
 
 For utility/helper methods that do not depend on instance variables.
 
-    Real use case of static
+    Real use case of volatile
 
 When multiple threads read and write a shared variable.
 
+===================================================================
 
+**Why we need immutable class in java and what is the use of this?**
+--------------------------------------------------------------------
 
+Immutable class object does not change the state and its state is reserved so no other thread can 
+use and change the state else it will be inconsistent behaviour.
+
+Hashcode for Immutable class is constant and cannot be changed.
+Java’s String class is immutable to prevent security vulnerabilities like unauthorized 
+modifications in URLs or database queries.
+
+Hash-based collections (HashMap, HashSet) rely on an object's hashCode. If an object’s state changes after being 
+added to a collection, it can lead to inconsistent behavior.
+
+**How to make the Immutable class in java?**
+-------------------------------------------
+Declare the class final → Prevents subclassing.
+Make fields private and final → Prevents direct modification.
+Do not provide setters or methods that modify state.
+Use defensive copies for mutable fields.
+Return new objects instead of modifying existing ones.
+
+String, Integer, Double, BigDecimal, LocalDateTime are all final and Immutable class.
+
+Concurrency
+
+Used in multi-threaded applications to prevent race conditions.
 
 
 

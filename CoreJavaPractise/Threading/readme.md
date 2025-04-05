@@ -63,6 +63,8 @@ Refer [ScheduledExecutorService.java]() file
 3. CountDownLatch is particularly useful in scenarios where you need to wait for a set of operations to 
     complete before proceeding. 
 
+refer program CountDownLatchDemo.java
+
 **difference between wait,notify and notify all and sleep**
 -----------------------------------------------------------
 wait, notify and notifyall are object class method where sleep is thread class method
@@ -342,6 +344,78 @@ Example below:
          e.printStackTrace();
          }
          } 
+
+
+==================================================================
+
+**Difference between synchronized block and synchronized method?**
+------------------------------------------------------------------
+1. Both locks the current instance or object of the class but method locks the entire body
+but block locks the particular block only.
+
+2. why method should be static not non static
+   when we say static method means for class and when we say non static method means objects or 
+   instances of that class.
+   so the method which we created should be static so that when synchronized it should lock the entire 
+   class does not matter how many instances are there but if we make that method as non static
+   then if multiple threads can deal with multiple instances of the class so if one instances is 
+   locked other instance from another thread can modify that shared resources.
+
+3. Synchronized will make sure thread are accessing the resources in synchronized way but which thread 
+    will access in which order that's not guarantee.
+
+
+**Thread Interruption**
+------------------------
+
+thread interruption is needed when it is taking too much time for execution or getting response on 
+network call or DB call.
+
+it interrupt the thread gracefully and then it will come in exception handling block whcih can 
+be handled gracefully.
+
+Please consider sample program
+ThreadInterruptExample.java
+
+
+**MAE Multithreading**
+----------------------
+
+In MAE we are using multithreading when we make a DB call to execute something but when any exception occurs
+we simply use as below-
+
+Thread.currentThread().interrupt();
+
+**CountDownLatch**
+----------------------
+In Countdownlatch main thread can wait for multiple worker threads to finish 
+
+Refer CountDownLatch.java program to understand how it works.
+
+**How is it different with Join()?????**
+----------------------------------------
+Join works for one thread where CountDownLatch works for multiple threads.
+
+Join==> One to one
+CountDownLatch==> one to many.
+
+
+
+**ExecutorService and Completable Future in java**
+--------------------------------------------------
+
+ExecutorService is used to create thread as many you want so all thread will run 
+asynchronously but to run those threads in parallel Completable Future is used
+
+Refer the best and efficient program - ExecutorServiceProgram.java
+
+
+
+
+
+
+
+
 
 
 

@@ -1151,17 +1151,170 @@ Spring Boot application using Resilience4j.
 it is used to load environment specific configurations from properties file or yml file
 
 
+**Can we replace @Service with @Configuration annotation in spring?**
+---------------------------------------------------------------------
+No , @Configuration is used for defining bean creation logic, 
+whereas @Service is used to mark service layer components.
+
+A @Service class is automatically detected by component scanning, 
+but @Configuration is not meant for marking service classes.
 
 
+**what happen if we don't use @Service annotation in spring?**
+---------------------------------------------------------------
+
+@service is required when you want automatically injection when you use @Autowired.
+
+if we don't use @service then spring will not detect this service and  
+using @Autowired at any service will give error as no bean def found
+
+if we don't use @Service then using @Component will work as Service is a specialization of component.
+
+        @Component
+        public class MyService {
+        public String process() {
+        return "Processing...";
+        }
+        }
+
+Spring will detect this during component scan and will inject this dependency
+
+**why do we need to use @Component annotations in Spring?**
+-----------------------------------------------------------
+@component annotations are used to scan all components during start up and are managed by spring bean.
+
+Like we have used @Component in Validators classes where actual validations will be done.
+
+@Component should be annotated for Utility classes , helper classes and general purpose classes,
+Business validators and custom annotations for logging or exception handling.
+
+**Exception Handling in Spring boot**
+--------------------------------------
+1. Create one custom ProductNotFoundException
+
+        public class ProductNotfoundException extends RuntimeException {
+            private static final long serialVersionUID = 1L;
+        }
+
+   2. Create one  ControllerAdvice where all different-2 product exceptions will be logged.
+   
+          @ControllerAdvice
+          public class ProductExceptionController {
+              @ExceptionHandler(value = ProductNotfoundException.class)
+              public ResponseEntity<Object> exception(ProductNotfoundException exception) {
+              return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+              }
+          }
+   
+      3. Add these in your controller class like below
+   
+              @PutMapping(value = "/products/{id}")
+              public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
+                  if(!productRepo.containsKey(id))throw new ProductNotfoundException();
+                  productRepo.remove(id);
+                  product.setId(id);
+                  productRepo.put(id, product);
+                  return new ResponseEntity<>("Product is updated successfully", HttpStatus.OK);
+              }
+
+=========================================================================
 
 
+**Caching in Spring boot**
+---------------------------
+
+Spring provides Caching Techniques using below annotations
+
+@Cacheable - Caches the result of a method based on its parameters.
+@CachePut - Updates the cache with the method’s result.
+@CacheEvict - Removes data from the cache. to delete all entries from cache use  @CacheEvict(value = "products", allEntries = true)
+@Caching -Allows combining multiple caching annotations using a single method.
+
+**How to enable caching in spring boot**
+----------------------------------------------
+
+1. Add @EnableCaching in your configuration class
+2. Add @cacheble or @CachePut or @CacheEvict as per your requirement in your service class
+    where you are retrieving the records and wants to cache.
 
 
+**How to make sure whenever any record in DB is updated or changes the cache is also updated.**
+-----------------------------------------------------------------------------------------------
+1. Use @CacheEvict so that if any record is being updated then cache is deleted with that record
+    but in this case when get will be called then it wont find any record in cache and hence it will fetch from DB
+2. Use @CachePut so that when ever any record is updated then cache is also updated.
+3. Manually evict or update cache using CacheManager
+4. set the TTL time in redis or ehcache to ensure data is evicted after 5-30 seconds so that after update
+    or add new record is fetched from database.
 
 
+PN - Spring never use cache on its own either you need to use below cache provider or use ConcurrentMapCacheManager
+
+**Distributed Caching**
+-------------------------
+Redis
+EHCache
+HazelCast
+Caffeine
 
 
+**ConcurrentMapCacheManager Implementation** - default
+------------------------------------------------------
+Storage Location: In-memory (within the same JVM)
+Persistence: None (cache is lost when the application stops or restarts)
+Use Case: Quick, lightweight caching for single-instance applications
+
+pom.xml dependencies
+1. 
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+
+2. 
+    @SpringBootApplication
+    @EnableCaching
+    public class MyApp {
+        public static void main(String[] args) {
+        SpringApplication.run(MyApp.class, args);
+        }
+    }
+
+3. 
+   @Configuration
+   public class CacheConfig {
+   @Bean
+   public CacheManager cacheManager() {
+   return new ConcurrentMapCacheManager("users", "products");
+   }
+   }
+
+4. @Service
+   public class UserService {
+
+   @Cacheable("users")
+   public String getUserById(String userId) {
+   System.out.println("Fetching from DB for userId: " + userId);
+   return "User_" + userId;
+   }
+   }
 
 
+**Problem in this default caching-**
+1. No Eviction policy - It cannot evict caches from DB.
+2. Cache will keep growing
+3. No distributed mechanism , not suitable for microservices or horizontal scaling?
+4. No persistence , data is stored in inmemory db.
+5. Not thread safe
+6. 
 
+**Which Caching Technique is most preferred.**
+----------------------------------------------
 
+Most Preferred Caching Techniques in Spring (as of 2025)
+🔹 1. Redis – Most popular for distributed caching
+Storage Location: Redis server (in-memory, networked)
+
+Persistence: Optional (based on Redis configuration)
+
+Use Case: Distributed cache, shared across multiple instances

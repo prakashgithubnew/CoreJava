@@ -1,6 +1,4 @@
-package CoreJavaPractise.java8practise.MultipleFilters;
-
-import CoreJavaPractise.java8practise.MultipleFilters.Employee;
+package CoreJavaPractise.java8practise.MultipleFiltersUsingPRedicate;
 
 import java.util.Arrays;
 import java.util.List;

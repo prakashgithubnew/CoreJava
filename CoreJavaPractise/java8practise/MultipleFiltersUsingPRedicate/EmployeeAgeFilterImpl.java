@@ -1,8 +1,8 @@
-package CoreJavaPractise.java8practise.MultipleFilters;
+package CoreJavaPractise.java8practise.MultipleFiltersUsingPRedicate;
 
 import java.util.List;
 
-import static CoreJavaPractise.java8practise.MultipleFilters.PredicateConstants.agePredicate;
+import static CoreJavaPractise.java8practise.MultipleFiltersUsingPRedicate.PredicateConstants.agePredicate;
 
 public class EmployeeAgeFilterImpl implements FilterManagement{
     @Override

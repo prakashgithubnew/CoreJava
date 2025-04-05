@@ -1,4 +1,4 @@
-package CoreJavaPractise.java8practise.MultipleFilters;
+package CoreJavaPractise.java8practise.MultipleFiltersUsingPRedicate;
 
 import java.util.List;
 

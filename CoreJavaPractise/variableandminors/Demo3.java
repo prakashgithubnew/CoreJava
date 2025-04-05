@@ -2,7 +2,12 @@ package CoreJavaPractise.variableandminors;
 
 public class Demo3 extends Demo2 {
 
+    protected Demo3(){
+
+    }
     public static void main(String[] args){
+
+        int g='A';
         new Demo3().show22();
     }
 
