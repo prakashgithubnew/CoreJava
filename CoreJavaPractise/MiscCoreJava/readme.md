@@ -1,3 +1,16 @@
+**How JVM Works (Execution Flow)**
+----------------------------------
+
+Compilation: Java code (.java) is compiled to bytecode (.class file) by the Java Compiler.
+
+Class Loading: The Class Loader loads the .class file into the Method Area.
+
+Memory Allocation: Objects and variables are created in the Heap and Stack.
+
+Execution: The Execution Engine interprets or compiles the bytecode.
+
+Garbage Collection: JVM cleans up unreferenced objects from the Heap.
+
 **java access modifiers**
 --------------------------
 
@@ -18,14 +31,17 @@ Polymorphism
 Abstraction
 Encapsulation
 
+
                 ENCAPSULATION
 
-Wrapping data (variables) and methods into a single unit (class) and restricting direct access to data.
-e.g, use private to hide data from outside and use getter and setter to give access.
+Wrapping data (variables) and methods into a single unit (class) and restricting direct access
+to data.
+e.g, use private to hide data from outside and use getter only to give access.
 
                 Abstraction
 
-Achieved using abstract classes and interfaces.Focus on what an object does rather than how it does.
+Achieved using abstract classes and interfaces.Focus on what an object does rather than how it
+does.
 
                 Inheritence
 Reusability of methods, variable from parent class.Implements and extends.
@@ -42,20 +58,19 @@ Run time Polymorphism(Dynamic) - Method Overriding - Based on the Object
 -----------------------------
 
                     Class                       Variable                                   Method
-Public              Yes                             Yes                                        Yes    
+Public              Yes                             Yes                                        Yes
 
 Private             No                              Yes                                        Yes
 
 Protected           No                              Yes but Only Instance Variable             Yes
 
-Static        only static inner class               yes only instance variable                  Yes     
+Static        only static inner class               yes only instance variable                  Yes
 
 Final              Yes                              yes                                        yes
 
 Final and static are the keywords in java
 Local variable cannot be static as it will give compile time error.
 =========================================================================================
-
 **Java Utilizes this memory as -**
 
     * When we write a java program then all the variables, methods, etc are stored in the stack memory.
@@ -83,7 +98,21 @@ Local variable cannot be static as it will give compile time error.
     Types of classloader 
         extension
         bootstrap
-        system
+        system - Class.forName
+
+**Can an ArrayList be made Thread-safe?**
+
+    List<String> list = Collections.synchronizedList(new ArrayList<>());
+    Wraps the list with synchronized methods.
+
+    But iteration still needs external synchronization:
+    
+    
+    synchronized (list) {
+        for (String item : list) {
+        // Safe iteration
+        }
+    }
 
 
 **What part of memory - Stack or Heap - is cleaned in garbage collection process?**
@@ -207,14 +236,12 @@ Finance
 
 **Use cases for Java Cloning**
 
-    Shallow copies are sufficient for simple structures or when shared references are desired. 
-    Deep copies are necessary when you need independent copies or when working with mutable data 
-    structures
+    when creating objects are too much expensive or costly, game server application where creating object is 
+    too much heavy and costly.
 
 **Arrays**
 
     Java arrays are passed by reference always means any change will reflect in the values also.
-
 **Instance, Local Variables**
 
     Instance variable can be defined in class where as Local can be defined in method , blocks or constructors
@@ -244,17 +271,20 @@ Finance
 
     You can use password as transient because its sensitive data 
 
+
+
 **Can we serialize static variables in java**
 
     Static Variable are not serialized in java hence the same value is gets printed after desrialization.
-    Because they belong to class not the instance and in serialization process objects state is maintained in network transfer
+    Because they belong to class not the instance and in serialization process objects state is 
+    maintained in network transfer
 
 **what happen if we don't serialize in java**
 
-    BY deffault all objects are saved in Heap Memory in java but to send that object to other services or
-    over network that need to be saved some where and then send it. Hence Serialization is needed.
-    if we dont use serialization then objects cannot be saved to any file and therefore cannot be
-    transferred to network.
+    In serialization process objects are converted in to Bytestream which need to be written in a file.
+    if we dont serialize then at the other end it will show java.io.NotSerializableException error
+    if we are using cahcing then it also serializes before it is saved to cache.
+
 
 **what is the use of serialversion id in serialization process**
 
@@ -272,77 +302,99 @@ Finance
 
     Every thread that accesses a volatile variable will read it from the main memory 
     and not from the CPU cache.
-
 **Given a large collection of Employee objects, write the most efficient stream operations to find employees whose salary is above a threshold.**
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-list.parallelStream - enables to work parallel for high list of data.
-It divides the workload into multiple threads, utilizing multi-core processors efficiently.
+    list.parallelStream - enables to work parallel for high list of data.
+    It divides the workload into multiple threads, utilizing multi-core processors efficiently.
 
 **Java is passed by reference or pass by value?**
 -------------------------------------------------
 
-Primitive data types are passed by Value.
-
-Object are passed as copy as reference
-
-Strings are immutable hence passed by value.
-
-All objects are passed by reference and will change the value except String.
+    Primitive data types are passed by Value.
+    
+    Object are passed as copy as reference
+    
+    Strings are immutable hence passed by value.
+    
+    All objects are passed by reference and will change the value except String.
 
 **which variable will you define as static or volatile in java**
 -----------------------------------------------------------------
 
-Static variable are related to Class and its value is shared to all objects but if 2 threads
-are accessing the static variable then if value is changed by 1 thread then the updated value is not reflected
-in 2nd thread due to static.
+    Static variable are related to Class and its value is shared to all objects but if 2 threads
+    are accessing the static variable then if value is changed by 1 thread then the updated value is not reflected
+    in 2nd thread due to static.
+    
+    Volatile are stored in RAM and its value is shared by all thread of every object.
+    so if any object is accessible by 2 threads and if any thread chnages the value then it will be
+    reflcted in 2nd thread also whcih was not the case for static.
 
-Volatile are stored in RAM and its value is shared by all thread of every object. so if any object is accessible by 
-2 threads and if any thread chnages the value then it will be reflcted in 2nd thread also whcih waa the case for static.
+
 
     Real use case of static -
 
-When creating a Singleton pattern.
+    When creating a Singleton pattern.
 
-For utility/helper methods that do not depend on instance variables.
+    For utility/helper methods that do not depend on instance variables.
 
     Real use case of volatile
 
-When multiple threads read and write a shared variable.
-
-===================================================================
+    When multiple threads read and write a shared variable.
 
 **Why we need immutable class in java and what is the use of this?**
 --------------------------------------------------------------------
 
-Immutable class object does not change the state and its state is reserved so no other thread can 
-use and change the state else it will be inconsistent behaviour.
-
-Hashcode for Immutable class is constant and cannot be changed.
-Java’s String class is immutable to prevent security vulnerabilities like unauthorized 
-modifications in URLs or database queries.
-
-Hash-based collections (HashMap, HashSet) rely on an object's hashCode. If an object’s state changes after being 
-added to a collection, it can lead to inconsistent behavior.
+    Immutable class object does not change the state and its state is reserved so no other thread can
+    use and change the state else it will be inconsistent behaviour.
+    
+    Hashcode for Immutable class is constant and cannot be changed.
+    Java’s String class is immutable to prevent security vulnerabilities like unauthorized
+    modifications in URLs or database queries.
+    
+    Hash-based collections (HashMap, HashSet) rely on an object's hashCode. If an object’s state changes after being
+    added to a collection, it can lead to inconsistent behavior.
 
 **How to make the Immutable class in java?**
 -------------------------------------------
-Declare the class final → Prevents subclassing.
-Make fields private and final → Prevents direct modification.
-Do not provide setters or methods that modify state.
-Use defensive copies for mutable fields.
-Return new objects instead of modifying existing ones.
-
-String, Integer, Double, BigDecimal, LocalDateTime are all final and Immutable class.
-
-Concurrency
-
-Used in multi-threaded applications to prevent race conditions.
+    Declare the class final → Prevents subclassing.
+    Make fields private and final → Prevents direct modification.
+    Do not provide setters or methods that modify state.
+    Use defensive copies for mutable fields.
+    Return new objects instead of modifying existing ones.
+    
+    String, Integer, Double, BigDecimal, LocalDateTime are all final and Immutable class.
 
 
+**what is diamond problem in OOPS**
+------------------------------------
+        Class A has a method foo().
+        Class B and Class C both extend A and override foo().
+        Class D extends both B and C.
+        The problem arises when calling foo() from an object of Class D, because the JVM doesn't 
+        know whether to call the method from B or C, since both have their own implementations of foo().
 
+        To solve this, Java requires the implementing class to override the conflicting method and 
+        resolve the ambiguity.
 
+**what is memory leak in java and how it can be prevented?**
+------------------------------------------------------------
+    Memory leak can happen in case when objects are created and now no longer needed but still referenced
+    by variable method or class , it exist still in memory and lead to memory leak.
 
+**How to avoid memory leak in java**
+------------------------------------
 
+    1. close the connections immediate after use.
+       2. Storing objects in caches without having a proper eviction strategy or timeout mechanism 
+          can cause memory leaks, especially if the cache grows over time.
+       3. consider using WeakReferences or SoftReferences.
 
+**what is weakreference and how it can help Garbage Collection**
+-----------------------------------------------------------------
+
+    A WeakReference in Java is a reference that does not prevent its referent (the object it points to) 
+    from being garbage collected. If an object is only weakly reachable (i.e., it is referenced only 
+    by weak references), then it can be collected by the Garbage Collector (GC), even if there are no 
+    other strong references to the object.
 

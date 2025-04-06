@@ -1,4 +1,4 @@
-package CoreJavaPractise.Threading;
+package CoreJavaPractise.MultiThreading;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

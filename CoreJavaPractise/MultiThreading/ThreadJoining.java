@@ -1,4 +1,4 @@
-package CoreJavaPractise.Threading;
+package CoreJavaPractise.MultiThreading;
 
 class ThreadJoining extends Thread
 {

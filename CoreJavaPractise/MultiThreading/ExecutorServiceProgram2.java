@@ -1,10 +1,7 @@
-package CoreJavaPractise.Threading;
+package CoreJavaPractise.MultiThreading;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.IntStream;
 
 /**
  * Prints even and odd numbers asynchronously with 2 threads

@@ -1,4 +1,4 @@
-package CoreJavaPractise.Threading;
+package CoreJavaPractise.MultiThreading;
 
 public class ThreadInterruptionExample {
     public static void main(String[] args){

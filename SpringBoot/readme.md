@@ -1306,7 +1306,7 @@ pom.xml dependencies
 3. No distributed mechanism , not suitable for microservices or horizontal scaling?
 4. No persistence , data is stored in inmemory db.
 5. Not thread safe
-6. 
+
 
 **Which Caching Technique is most preferred.**
 ----------------------------------------------
