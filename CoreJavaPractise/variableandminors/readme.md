@@ -15,7 +15,7 @@ be shared same
 Instance Variables - within class but non-static
 ------------------------------------------------
 Need not initialize during declaration.They will take default values.
-the values are specific to each instances
+The values are specific to each instances.
 
 Local Variable - within method, constructor or block
 -----------------------------------------------------
@@ -31,7 +31,6 @@ an object of the class
 
 Method Overloading
 -------------------
-
 * Methods can be overloaded and overrided
 * Static Methods can be overloaded by same name but different signature
 * We cannot overload static and non static methods together as compiler cannot identify 
@@ -44,8 +43,8 @@ static method also can be overrided
 static method cannot be overrided by non static methods - compile time error
 non static methods cannot be overrided by static methods - Compile time error
 
-static methods are called depending on the class reference
-non-static methods are called depending on the class object.
+static methods are called depending on the class reference - method overloading
+non-static methods are called depending on the class object - method overriding
 static and non-static variables can be accessed in the child class also 
 
 

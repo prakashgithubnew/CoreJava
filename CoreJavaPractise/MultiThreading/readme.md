@@ -14,7 +14,7 @@
     2. Multithreading can be achieved by 2 ways.Extending the class with Thread and implementing by runnable interface.
        Extending any thread can be preferred as the object can use multiple methods yield and interrupt
        which is not possible in case of runnable.
-   3. Suppose you have 2 threads and you started both by using t1.start and t2.start and then you are using
+    3. Suppose you have 2 threads and you started both by using t1.start and t2.start and then you are using
    t1.join and then t2.join.This will not synchronize threads to run one after another because you started both together.
    To make it work one after another you need to use as below
    t1.start()
@@ -73,6 +73,7 @@ wait, notify and notifyall are object class method where sleep is thread class m
 -----------------------
 Thread can be interrupted by using Thread.interrupt() method.
 Once thread is started by start method the same can be interrupted anytime.
+Interrupts and force thread to stopped
 
 **Asynchronous programming**
 --------------------------------------------------
@@ -89,7 +90,8 @@ Refer full program in [CompletableFutureProgram.java]()
     }
     return "Hello, CompletableFuture!";
     });
-or ExecutorServiceProgram.java
+
+   or ExecutorServiceProgram.java
 
 **ExecutorService**
 -------------------

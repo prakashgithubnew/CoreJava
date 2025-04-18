@@ -48,7 +48,7 @@ Reusability of methods, variable from parent class.Implements and extends.
 We cannot achieve multiple inheritence in classes , only with interface can be achieved.
 
                             Polymorphism
-        Compile time Polymorphism             Runtime polymorphism
+    Compile time Polymorphism             Runtime polymorphism
 
 Compile time Polymorphism(Static)- Method Overloading - Based on the Reference
 
@@ -236,16 +236,17 @@ Finance
 
 **Use cases for Java Cloning**
 
-    when creating objects are too much expensive or costly, game server application where creating object is 
-    too much heavy and costly.
+    when creating objects are too much expensive or costly, 
+    game server application where creating object is too much heavy and costly.
 
 **Arrays**
 
     Java arrays are passed by reference always means any change will reflect in the values also.
 **Instance, Local Variables**
 
-    Instance variable can be defined in class where as Local can be defined in method , blocks or constructors
-    Instance or class(static) varaibles need not to define, they take default values.
+    Instance variable can be defined in class where as Local can be defined in method , 
+    blocks or constructors Instance or class(static) varaibles need not to define, 
+    they take default values.
     Local variable need to be defined , they wont take default values.
     All final variable need to be initialized.
 
@@ -271,8 +272,6 @@ Finance
 
     You can use password as transient because its sensitive data 
 
-
-
 **Can we serialize static variables in java**
 
     Static Variable are not serialized in java hence the same value is gets printed after desrialization.
@@ -283,7 +282,7 @@ Finance
 
     In serialization process objects are converted in to Bytestream which need to be written in a file.
     if we dont serialize then at the other end it will show java.io.NotSerializableException error
-    if we are using cahcing then it also serializes before it is saved to cache.
+    if we are using caching then it also serializes before it is saved to cache.
 
 
 **what is the use of serialversion id in serialization process**
