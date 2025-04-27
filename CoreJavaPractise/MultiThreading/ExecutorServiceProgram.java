@@ -8,25 +8,25 @@ import java.util.concurrent.Executors;
 public class ExecutorServiceProgram {
     public static void main(String[] args) {
 
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newFixedThreadPool(1);
 
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             System.out.println("Inside future starts");
-            sleep(500);
+            //sleep(500);
             System.out.println("Inside future end");
             return "Hello, Future!";
         }, executor);
 
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
             System.out.println("Inside future1 starts");
-            sleep(500);
+            //sleep(500);
             System.out.println("Inside future1 end");
             return "Hello, Future1!";
         }, executor);
 
         CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
             System.out.println("Inside future2 starts");
-            sleep(500);
+            //sleep(500);
             System.out.println("Inside future2 ends");
             return "Hello, Future2!";
         }, executor);
@@ -36,7 +36,7 @@ public class ExecutorServiceProgram {
                 .thenCombine(future1, String::concat)
                 .thenCombine(future2, String::concat);
 
-        System.out.println("The Result: " + combinedFuture.join());
+        //System.out.println("The Result: " + combinedFuture.join());
 
         executor.shutdown();
     }

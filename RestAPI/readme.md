@@ -222,3 +222,41 @@ HTTPS: Always use HTTPS to encrypt API communication.
 Use HTTP caching headers like Cache-Control, ETag, and Last-Modified.
 
 Enable server-side or client-side caching for frequently accessed resources.
+
+
+**API Versioning**
+------------------
+API versioning is the strategy to support existing users as well as new users.
+Old users can use the existing old version of APIs without an impact on new users.
+
+Types of API versioning - 
+1. URL Versioning - /api/v1/resource(Most recommended way)
+2. Header versioning - you can send versions in headers.
+
+**What is backward compatibility**
+----------------------------------
+Backward compatibility is to ensure old clients can continue with their work even after the 
+APIs are updated.
+
+you can achieve this by API versioning and also by adding optional 
+parameters considering UI has to handle the optional field gracefully.
+
+API Version starategy
+
+3.             2.                    1
+
+Major          New Features         Bug Fixes or patches
+
+
+**API Life Cycle**
+------------------
+
+Define
+design
+develop
+test
+secure
+dePloy
+observe
+distribute
+

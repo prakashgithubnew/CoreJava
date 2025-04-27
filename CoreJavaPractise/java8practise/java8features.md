@@ -91,7 +91,8 @@ to maintain.
     The output of this sequential stream is predictable. The list elements will always be 
     printed in an ordered sequence.
 
-    Parallel streams enable us to execute code in parallel on separate cores. 
+    Parallel streams enable us to execute code in parallel on separate cores. Paralle streams can break the big tasks
+    in multiple chunks and execute each chunks in parallel threads for faster execution.
     The final result is the combination of each individual outcome.
 
 ====================================================

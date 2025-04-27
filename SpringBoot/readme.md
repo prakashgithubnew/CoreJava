@@ -47,11 +47,13 @@ spring-boot-starter-parent - The spring-boot-starter-parent project is a special
 
 
 **What is an IOC container?**
+----------------------------
 
-Spring IoC Container is the core of Spring Framework. It creates the objects, configures and assembles 
-their dependencies, manages their entire life cycle. The Container uses Dependency Injection(DI) to 
-manage the components that make up the application. It gets the information about the objects from 
-a configuration file(XML) or Java Code or Java Annotations and Java POJO class. These objects are 
+Spring IoC Container is the core of Spring Framework. It creates the objects, configures and 
+assembles their dependencies, manages their entire life cycle. 
+The Container uses Dependency Injection(DI) to manage the components that make up the application.
+It gets the information about the objects from a configuration file(XML) or Java Code or Java 
+Annotations and Java POJO class. These objects are 
 called Beans. Since the Controlling of Java objects and their lifecycle is not done by the developers, 
 hence the name Inversion Of Control.
 
@@ -270,8 +272,7 @@ Field Injection - Just autowired annotation before the field
         @Max
         @DecimalMax
         @DecimalMin
-    
-    
+
     Use Jackson jar for Models annotations
         @JsonProperty
 
@@ -291,6 +292,7 @@ references like below
     
         // standard getters and setters
     }
+
 @Configuration is used to initialize the spring bean in application context
 @ConfigurationProperties is used to use the hierarchy mentioned in the prefix mail
 

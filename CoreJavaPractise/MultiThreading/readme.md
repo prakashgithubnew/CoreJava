@@ -411,6 +411,13 @@ asynchronously but to run those threads in parallel Completable Future is used
 
 Refer the best and efficient program - ExecutorServiceProgram.java
 
+**Thread Local**
+----------------
+
+Thread local is a class which sets any variable to thread wise not global.
+Each thread will have their local copies of the variable value and other threads cannot access 
+that value or change the value.
+
 
 
 
