@@ -269,3 +269,28 @@ API Throttling - Number of API requests that can be processed by API.Slow down t
 API Rate Limiting - Number of API request a client can make. Once limit is breached other request 
                      are rejected.
 
+
+**Throttling Implementation in Spring boot**
+---------------------------------------------
+How to Implement throttling in spring boot
+
+1. Add below dependency
+   <dependencies>
+   <dependency>
+   <groupId>com.weddini.throttling</groupId>
+   <artifactId>spring-boot-throttling-starter</artifactId>
+   <version>0.0.9</version>
+   </dependency>
+   </dependencies>
+2. The service method which you want to be limit the request you can add lke below
+
+@Throttling(type = ThrottlingType.RemoteAddr, limit = 1, timeUnit = TimeUnit.SECONDS)
+public void serviceMethod() {}
+
+[it says 1 request per second is the limit]
+
+3. error handling if limit reached
+
+@ResponseStatus(code = HttpStatus.TOO_MANY_REQUESTS, reason = "Too many requests")
+public class ThrottlingException extends RuntimeException {}
+
