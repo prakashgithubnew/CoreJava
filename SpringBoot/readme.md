@@ -673,9 +673,21 @@ Annotation used in Spring Batch Program
 -----------------------------------------
 1. Remove Inefficient code
    Inefficient Code and Algorithms with worst time complexity O(n)
-2. Use asynchronous calls where ever it is necessary instead of synchronous calls as synchronous calls made performance impact 
+2. Use asynchronous calls where ever it is necessary instead of synchronous calls as 
+   synchronous calls made performance impact 
 3. Slow Database Queries
-4. Use profiling tools to monitor if any threads are still active and of no usage. Those threads can be killed immediately.
+4. Use profiling tools to monitor if any threads are still active and of no usage. 
+   Those threads can be killed immediately.
+5. Use Spring webflux instead of spring traditional approach as this might be more faster and 
+   uses optimal resources. It is known as reactive programming which comes under reactive programming model
+   Spring WebFlux provides a non-blocking and event-driven programming model that allows developers to build scalable 
+   and high-performance web applications. Spring webflux can handle large number of concurrent users by using
+   small number of threads. Spring webflux can be used for non blocking and asynchronous applications.
+6. Spring webflux uses reactive stack where as spring MVC uses servlet stack.
+7. Spring MVC is built to handle synchronous response where as spring webflux is used for asynchronous stack.
+8. Spring webflux is built on high concurrency and to handle non blocking I/O
+9. Spring webflux uses mono and webclient to handle non blocking I/O.
+10. 
 
 
 **Spring Boot Filters and Interceptors**
@@ -984,11 +996,14 @@ information or shopping cart contents).
 
 Here’s how it works:
 
-When a user makes a request, the load balancer assigns that request to a specific server, and a session ID (usually stored in a cookie) is tied to that server.
+When a user makes a request, the load balancer assigns that request to a specific server, 
+and a session ID (usually stored in a cookie) is tied to that server.
 
-On subsequent requests, the load balancer uses that session ID to ensure the requests go to the same server that handled the initial request.
+On subsequent requests, the load balancer uses that session ID to ensure the requests go to 
+the same server that handled the initial request.
 
-This helps maintain session consistency and prevents data loss or errors, particularly in scenarios like shopping carts or user profiles.
+This helps maintain session consistency and prevents data loss or errors, particularly in 
+scenarios like shopping carts or user profiles.
 
 **Spring Boot Transaction Handling**
 ---------------------------------------
@@ -1046,7 +1061,8 @@ Create-drop - will create and drop after use.
 
 Running native queries in spring 
 
-In Spring, you can run native SQL queries using Spring Data JPA or JdbcTemplate. Here’s how you can do it:
+In Spring, you can run native SQL queries using Spring Data JPA or JdbcTemplate. 
+Here’s how you can do it:
 
 
 ---
@@ -1152,15 +1168,13 @@ Spring Boot application using Resilience4j.
 
 it is used to load environment specific configurations from properties file or yml file
 
-
 **Can we replace @Service with @Configuration annotation in spring?**
 ---------------------------------------------------------------------
 No , @Configuration is used for defining bean creation logic, 
 whereas @Service is used to mark service layer components.
-
+]
 A @Service class is automatically detected by component scanning, 
 but @Configuration is not meant for marking service classes.
-
 
 **what happen if we don't use @Service annotation in spring?**
 ---------------------------------------------------------------
@@ -1198,7 +1212,7 @@ Business validators and custom annotations for logging or exception handling.
             private static final long serialVersionUID = 1L;
         }
 
-   2. Create one  ControllerAdvice where all different-2 product exceptions will be logged.
+2. Create one  ControllerAdvice where all different-2 product exceptions will be logged.
    
           @ControllerAdvice
           public class ProductExceptionController {
@@ -1208,7 +1222,7 @@ Business validators and custom annotations for logging or exception handling.
               }
           }
    
-      3. Add these in your controller class like below
+3. Add these in your controller class like below
    
               @PutMapping(value = "/products/{id}")
               public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
@@ -1320,3 +1334,122 @@ Storage Location: Redis server (in-memory, networked)
 Persistence: Optional (based on Redis configuration)
 
 Use Case: Distributed cache, shared across multiple instances
+
+
+**How to achieve max throughput or increase number of request per seconds in spring boot applications**
+-------------------------------------------------------------------------------------------------------
+
+1. Check the performance metrics using JProfiler or AWS-XRay(in case of cloud) where is the bottlenecks.
+
+There could be same reasons as below but depends on case to case-
+
+* Thread pool saturation: The default Tomcat connector was hitting its limits
+* Database connection contention: HikariCP configuration was not optimized for our workload
+* Inefficient serialization: Jackson was consuming significant CPU during request/response processing
+* Blocking I/O operations: Especially when calling external services
+* Memory pressure: Excessive object creation causing frequent GC pauses
+
+Solutions and Fix implementations
+1. Use Reactive programming - Adopting reactive programming with Spring WebFlux.Spring webflux 
+    helps in creating more responsive and functional programming style 
+    in reactive and non-blocking manner.
+2. 
+
+Example
+
+// BEFORE: Blocking implementation
+@Service
+public class ProductService {
+@Autowired
+private ProductRepository repository;
+
+    public Product getProductById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+}
+
+
+
+// AFTER: Reactive implementation
+@Service
+public class ProductService {
+@Autowired
+private ReactiveProductRepository repository;
+
+    public Mono<Product> getProductById(Long id) {
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException(id)));
+    }
+}
+
+
+// BEFORE: Traditional Spring MVC controller
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+@Autowired
+private ProductService service;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getProductById(id));
+    }
+}
+
+
+
+// AFTER: WebFlux reactive controller
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+@Autowired
+private ProductService service;
+
+    @GetMapping("/{id}")
+    public Mono<ResponseEntity<Product>> getProduct(@PathVariable Long id) {
+        return service.getProductById(id)
+            .map(ResponseEntity::ok)
+            .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+}
+
+
+This change alone doubled our throughput by making more efficient use of threads. 
+Instead of one thread per request, 
+WebFlux uses a small number of threads to handle many concurrent requests.
+
+
+Spring web-flux uses event stream and event loop model 
+
+**Spring Security**
+-------------------
+There are many ways to implement security using spring for authentication and authorisation
+
+1.Web Based Authentication
+--------------------------
+
+Just add below config in pom.xml
+
+<dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+</dependencies>
+
+After adding this if we hit any API end Point we will be redirected to the login page asking for 
+login credentials
+To pass the authentication, we can use the default username user and find an auto-generated password in our console:
+
+Using generated security password: 1fc15145-dfee-4bec-a009-e32ca21c77ce
+
+This password if generated everytime we run the application.
+if we want to set up the fixed password you will need to add below property in application.properties file
+
+spring.security.user.password=Test12345_
+
+Now the page can be accessed after credentials are authenticated
+
+
+

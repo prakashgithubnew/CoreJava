@@ -260,3 +260,12 @@ dePloy
 observe
 distribute
 
+**API throttling vs rate limiting**
+------------------------------------
+There are slight difference in these 2 terms
+API Throttling - Number of API requests that can be processed by API.Slow down the process once
+                  limit is breached but still request can be processed but in slow manner.
+
+API Rate Limiting - Number of API request a client can make. Once limit is breached other request 
+                     are rejected.
+
