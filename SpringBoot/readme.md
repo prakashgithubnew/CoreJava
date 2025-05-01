@@ -1424,10 +1424,29 @@ Spring web-flux uses event stream and event loop model
 
 **Spring Security**
 -------------------
+Spring security uses the servlet filters to bring different types of security.
+
+BasicAuth - for basic auth security
+formlogin - for form security
+
+Diagram for E2E Flow Spring Security
+
+![img_2.png](img_2.png)
+
+
 There are many ways to implement security using spring for authentication and authorisation
 
-1.Web Based Authentication
---------------------------
+1. Authentication 
+
+Types
+
+Basic
+Form Based
+OAuth
+
+
+Basic(default implementation of user details service)
+-----------------------------------------------------
 
 Just add below config in pom.xml
 
@@ -1450,6 +1469,96 @@ if we want to set up the fixed password you will need to add below property in a
 spring.security.user.password=Test12345_
 
 Now the page can be accessed after credentials are authenticated
+
+**Custom security username and password** - By customizing userDetailservice
+-----------------------------------------------------------------------------
+
+You can customize the security credentials as in above steps as per your username and pwd
+1. Create new config class and add below
+
+@Configuration
+public class MySecurityConfig {
+
+    @Bean
+    UserDetailsService userDetailsService(){
+        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
+        UserDetails user = User.withUsername("tom").password(passwordEncoder().encode("sen")).authorities("read").build();
+        inMemoryUserDetailsManager.createUser(user);
+        return inMemoryUserDetailsManager;
+    }
+
+    @Bean
+    BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.httpBasic();
+        http.authorizeHttpRequests().anyRequest().authenticated();
+        return http.build();
+    }
+}
+
+once you run it will not take default username and pwd and will take tom and sen as username and pwd
+In this implementation you are using inmemory user details and adding it to inmemory and then 
+comparing after login.
+
+**Custom Authenticator Service   - By customizing the Authenticator service
+---------------------------------------------------------------------------
+
+comment out belwo part
+
+/**
+@Bean
+UserDetailsService userDetailsService(){
+InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
+UserDetails user = User.withUsername("tom").password(passwordEncoder().encode("sen")).authorities("read").build();
+inMemoryUserDetailsManager.createUser(user);
+return inMemoryUserDetailsManager;
+}
+**/
+
+Add new component as AuthenticatorService Implements AuthenticationProvider and add methods
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    String username = authentication.getName();
+    String password = authentication.getCredentials().toString();
+    if("tom".equals(username) &&
+    "sen".equals(password)){
+    return new UsernamePasswordAuthenticationToken(username,password, Arrays.asList());
+    } else {
+    throw new BadCredentialsException("Bad Credentials");
+    }
+
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+
+
+Form Based
+----------
+In the filter chain method change as below
+
+http.httpBasic();
+
+OAuth
+-----
+
+
+
+2. Authorization
+
+Based on role users will be permitted to certain URLs or links
+
+
+
+
 
 
 

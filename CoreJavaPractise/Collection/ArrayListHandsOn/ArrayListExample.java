@@ -1,7 +1,9 @@
-package CoreJavaPractise.Collection;
+package CoreJavaPractise.Collection.ArrayListHandsOn;
+
+import CoreJavaPractise.Collection.Employee;
+import CoreJavaPractise.Collection.PredicateConstants;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ArrayListExample {

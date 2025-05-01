@@ -4,5 +4,5 @@ import java.util.function.Predicate;
 
 public class PredicateConstants {
 
-    Predicate<Integer> greaterThanTen = (i) -> i > 10;
+    public Predicate<Integer> greaterThanTen = (i) -> i > 10;
 }
