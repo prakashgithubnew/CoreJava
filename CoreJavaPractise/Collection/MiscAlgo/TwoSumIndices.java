@@ -1,4 +1,4 @@
-package CoreJavaPractise.AlgorythymsPractise;
+package CoreJavaPractise.Collection.MiscAlgo;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class TwoSumIndices {
     }
 
     /**
-     * Time complexity is O(n2) due to nested loops
+     * Time complexity is O(n^2) due to nested loops
      * @param num
      * @return
      */

@@ -1,10 +1,9 @@
-package CoreJavaPractise.Collection;
+package CoreJavaPractise.Collection.StringhandsOn;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class StringExample {
+public class CharacterOccurrencesInString {
 
     /** Count each character occurrences in the string
      * Total Time Complexity of this program is O(n) because one for loop is

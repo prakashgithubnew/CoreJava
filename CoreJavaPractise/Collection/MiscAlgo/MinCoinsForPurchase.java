@@ -1,4 +1,4 @@
-package CoreJavaPractise.Collection;
+package CoreJavaPractise.Collection.MiscAlgo;
 
 import java.util.Arrays;
 import java.util.Comparator;
