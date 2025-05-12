@@ -42,6 +42,53 @@ where all instances of services are registered
 service discovery has information of all the services registered in service registry
 
 
+**Building Microservice and service registry/discovery.**
+---------------------------------------------------------
+Create Microservice-simple microservice
+--------------------
+1. Create microservice and add web and eureka client dependency
+2. Have an end point ready.
+3. @EnableDiscoveryClient Annotation in top of main application class
+4. Add eureka server URL so that this service can register with eureka server
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+
+After this step 4 when MS will start it will automatically regsiter with eureka server
+
+Create Spring boot application-eureka server
+--------------------------------------------
+1. Create spring boot application with netflix eureka server dependency
+2. Add @EnableEurekaServer annotation in main class
+3. set eureka.client.register-with-eureka = false
+4. set eureka-client-fetch-regsitry=false
+5. provide eureka-service-url=<url where eureka server is running>
+
+
+**Client side discovery and server side discovery**
+---------------------------------------------------
+CSD
+client will make a query to registry directly to connect with any service.
+
+SSD
+client will make a query to LB to identify the service and connect.LB will check with registry to
+identify the service
+
+**Kafka or RabbitMQ**
+----------------------
+Kakfa  - Distributed partitioned ,replicated and commit log service
+RabbitMQ - centralized message brokering
+
+
+ConfigServer
+------------
+centralized config properties
+
+@RefreshScope - Bean Annotated will be refreshed on run time.
+
+
+
+
+
+
 
 
 

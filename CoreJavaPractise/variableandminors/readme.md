@@ -105,6 +105,9 @@ Yes but private method defined in super class cannot be accessed in the subclass
         }  
     }
 
+private is specific to class hence class reference will be used to access the class method.So here Base class method will be called 
+but error due to private modifier in fun method in Base.
+
 this will give compile time error as fun method cannot be accessed by subclass object
 
 **can weaker access be given to overrided method in subclass?**

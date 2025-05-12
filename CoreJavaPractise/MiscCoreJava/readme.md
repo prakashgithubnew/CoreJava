@@ -3,7 +3,7 @@
 
 Compilation: Java code (.java) is compiled to bytecode (.class file) by the Java Compiler.
 
-Class Loading: The Class Loader loads the .class file into the Method Area.
+Class Loading: The Class Loader(System class loader) loads the .class file into the Method Area.
 
 Memory Allocation: Objects and variables are created in the Heap and Stack.
 
@@ -100,14 +100,17 @@ Local variable cannot be static as it will give compile time error.
         bootstrap
         system - Class.forName
 
+we should not use the classloader always as this is slower process and it shud be used when 
+specific need.
+
+
 **Can an ArrayList be made Thread-safe?**
 
     List<String> list = Collections.synchronizedList(new ArrayList<>());
     Wraps the list with synchronized methods.
 
     But iteration still needs external synchronization:
-    
-    
+       
     synchronized (list) {
         for (String item : list) {
         // Safe iteration
@@ -258,7 +261,6 @@ Finance
 **What is the use of constructors in java**
 
     Initialize the variable or any object.
-
 
 **What is transient keyword or variable in java**
 

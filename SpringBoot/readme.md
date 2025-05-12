@@ -583,7 +583,7 @@ ItemWriter: Writes the processed data to a destination.
 Annotation used in Spring Batch Program
 
 
-1. Create simple batch config file
+1.Create simple batch config file
 -----------------------------------
 
        @Configuration
@@ -627,7 +627,7 @@ Annotation used in Spring Batch Program
         }
     }
 
-2. Create SimpleItemReader
+2.Create SimpleItemReader
 ------------------------------
 
     public class SimpleItemReader implements ItemReader<String> {
@@ -642,7 +642,7 @@ Annotation used in Spring Batch Program
         }
     }
 
-3. Create ItemProcessor
+3.Create ItemProcessor
 -----------------------
     public class SimpleItemProcessor implements ItemProcessor<String, String> {
     @Override
@@ -651,7 +651,7 @@ Annotation used in Spring Batch Program
         }
     }
 
-4. Create Itemwriter
+4.Create Itemwriter
 ---------------------
        public class SimpleItemWriter implements ItemWriter<String> {
        @Override
@@ -660,7 +660,7 @@ Annotation used in Spring Batch Program
            }
        }
 
-5. Create spring batch run application
+5.Create spring batch run application
 --------------------------------------
     @SpringBootApplication
     public class BatchApplication {
@@ -679,15 +679,16 @@ Annotation used in Spring Batch Program
 4. Use profiling tools to monitor if any threads are still active and of no usage. 
    Those threads can be killed immediately.
 5. Use Spring webflux instead of spring traditional approach as this might be more faster and 
-   uses optimal resources. It is known as reactive programming which comes under reactive programming model
-   Spring WebFlux provides a non-blocking and event-driven programming model that allows developers to build scalable 
-   and high-performance web applications. Spring webflux can handle large number of concurrent users by using
-   small number of threads. Spring webflux can be used for non blocking and asynchronous applications.
-6. Spring webflux uses reactive stack where as spring MVC uses servlet stack.
-7. Spring MVC is built to handle synchronous response where as spring webflux is used for asynchronous stack.
-8. Spring webflux is built on high concurrency and to handle non blocking I/O
-9. Spring webflux uses mono and webclient to handle non blocking I/O.
-10. 
+   uses optimal resources. It is known as reactive programming which comes under reactive 
+   programming model Spring WebFlux provides a non-blocking and event-driven programming model 
+   that allows developers to build scalable and high-performance web applications. 
+   Spring webflux can handle large number of concurrent users by using small number of threads. 
+   Spring webflux can be used for non blocking and asynchronous applications.
+   Spring webflux uses reactive stack where as spring MVC uses servlet stack.
+   Spring MVC is built to handle synchronous response where as spring webflux is used for asynchronous stack.
+   Spring webflux is built on high concurrency and to handle non blocking I/O
+   Spring webflux uses mono and webclient to handle non blocking I/O.
+
 
 
 **Spring Boot Filters and Interceptors**
@@ -816,7 +817,8 @@ Create Entity class
         // ...
         }
 
-We don’t have direct access to the EntityManager in a JpaRepository, and therefore we need to create our own.
+We don’t have direct access to the EntityManager in a JpaRepository, and therefore we need to 
+create our own.
 
     @PersistenceContext
         private EntityManager entityManager;
@@ -1421,144 +1423,3 @@ WebFlux uses a small number of threads to handle many concurrent requests.
 
 
 Spring web-flux uses event stream and event loop model 
-
-**Spring Security**
--------------------
-Spring security uses the servlet filters to bring different types of security.
-
-BasicAuth - for basic auth security
-formlogin - for form security
-
-Diagram for E2E Flow Spring Security
-
-![img_2.png](img_2.png)
-
-
-There are many ways to implement security using spring for authentication and authorisation
-
-1. Authentication 
-
-Types
-
-Basic
-Form Based
-OAuth
-
-
-Basic(default implementation of user details service)
------------------------------------------------------
-
-Just add below config in pom.xml
-
-<dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-</dependencies>
-
-After adding this if we hit any API end Point we will be redirected to the login page asking for 
-login credentials
-To pass the authentication, we can use the default username user and find an auto-generated password in our console:
-
-Using generated security password: 1fc15145-dfee-4bec-a009-e32ca21c77ce
-
-This password if generated everytime we run the application.
-if we want to set up the fixed password you will need to add below property in application.properties file
-
-spring.security.user.password=Test12345_
-
-Now the page can be accessed after credentials are authenticated
-
-**Custom security username and password** - By customizing userDetailservice
------------------------------------------------------------------------------
-
-You can customize the security credentials as in above steps as per your username and pwd
-1. Create new config class and add below
-
-@Configuration
-public class MySecurityConfig {
-
-    @Bean
-    UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-        UserDetails user = User.withUsername("tom").password(passwordEncoder().encode("sen")).authorities("read").build();
-        inMemoryUserDetailsManager.createUser(user);
-        return inMemoryUserDetailsManager;
-    }
-
-    @Bean
-    BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.httpBasic();
-        http.authorizeHttpRequests().anyRequest().authenticated();
-        return http.build();
-    }
-}
-
-once you run it will not take default username and pwd and will take tom and sen as username and pwd
-In this implementation you are using inmemory user details and adding it to inmemory and then 
-comparing after login.
-
-**Custom Authenticator Service   - By customizing the Authenticator service
----------------------------------------------------------------------------
-
-comment out belwo part
-
-/**
-@Bean
-UserDetailsService userDetailsService(){
-InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-UserDetails user = User.withUsername("tom").password(passwordEncoder().encode("sen")).authorities("read").build();
-inMemoryUserDetailsManager.createUser(user);
-return inMemoryUserDetailsManager;
-}
-**/
-
-Add new component as AuthenticatorService Implements AuthenticationProvider and add methods
-
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    String username = authentication.getName();
-    String password = authentication.getCredentials().toString();
-    if("tom".equals(username) &&
-    "sen".equals(password)){
-    return new UsernamePasswordAuthenticationToken(username,password, Arrays.asList());
-    } else {
-    throw new BadCredentialsException("Bad Credentials");
-    }
-
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
-    }
-
-
-
-Form Based
-----------
-In the filter chain method change as below
-
-http.httpBasic();
-
-OAuth
------
-
-
-
-2. Authorization
-
-Based on role users will be permitted to certain URLs or links
-
-
-
-
-
-
-

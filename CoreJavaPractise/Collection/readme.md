@@ -48,19 +48,6 @@ if different keys then add the element as image above.
 3. if key matches then fetch the value.
 4. if key does not match then retrieve the next element and so on...
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 **Difference between collections and collection**
 ---------------------------------------------------
 
