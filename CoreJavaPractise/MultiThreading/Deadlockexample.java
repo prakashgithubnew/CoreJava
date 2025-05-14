@@ -30,14 +30,14 @@ public class Deadlockexample {
     }
     private static class Thread2 extends Thread{
         public void run() {
-            synchronized (object1) {
+            synchronized (object2) {
                 System.out.println("Thread 2: Holding lock 2...");
 
                 try { Thread.sleep(10); }
                 catch (InterruptedException e) {}
                 System.out.println("Thread 2: Waiting for lock 1...");
 
-                synchronized (object2) {
+                synchronized (object1) {
                     System.out.println("Thread 2: Holding lock 1 & 2...");
                 }
             }
@@ -45,3 +45,10 @@ public class Deadlockexample {
     }
 }
 
+///Output
+/*
+Thread 1: Holding lock 1...
+Thread 2: Holding lock 2...
+Thread 1: Waiting for lock 2...
+Thread 2: Waiting for lock 1...
+*/
