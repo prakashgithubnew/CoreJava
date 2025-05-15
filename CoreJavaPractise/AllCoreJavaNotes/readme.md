@@ -70,6 +70,8 @@ Final              Yes                              yes                         
 
 Final and static are the keywords in java
 Local variable cannot be static as it will give compile time error.
+Java method can be protected and static both.
+
 =========================================================================================
 **Java Utilizes this memory as -**
 
@@ -245,6 +247,7 @@ Finance
 **Arrays**
 
     Java arrays are passed by reference always means any change will reflect in the values also.
+
 **Instance, Local Variables**
 
     Instance variable can be defined in class where as Local can be defined in method , 
@@ -284,7 +287,10 @@ Finance
 
     In serialization process objects are converted in to Bytestream which need to be written in a file.
     if we dont serialize then at the other end it will show java.io.NotSerializableException error
+    if we dont serialize then objects cannot be sent over network.
+    RMI,WEBSERVICES and Socket program rely on serialization
     if we are using caching then it also serializes before it is saved to cache.
+    Kafka / JMS / Messaging systems: Expect serialized data
 
 
 **what is the use of serialversion id in serialization process**
@@ -303,7 +309,8 @@ Finance
 
     Every thread that accesses a volatile variable will read it from the main memory 
     and not from the CPU cache.
-**Given a large collection of Employee objects, write the most efficient stream operations to find employees whose salary is above a threshold.**
+**Given a large collection of Employee objects, write the most efficient stream operations to find employees whose 
+  salary is above a threshold.**
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
     list.parallelStream - enables to work parallel for high list of data.
@@ -444,8 +451,8 @@ static method also can be overrided
 static method cannot be overrided by non static methods - compile time error
 non static methods cannot be overrided by static methods - Compile time error
 
-static methods are called depending on the class reference - method overloading
-non-static methods are called depending on the class object - method overriding
+static methods are called depending on the class reference - method overloading-compile time
+non-static methods are called depending on the class object - method overriding-runtime
 static and non-static variables can be accessed in the child class also
 
 
@@ -506,7 +513,8 @@ Yes but private method defined in super class cannot be accessed in the subclass
         }  
     }
 
-private is specific to class hence class reference will be used to access the class method.So here Base class method will be called
+private is specific to class hence class reference will be used to access the class method.
+So here Base class method will be called
 but error due to private modifier in fun method in Base.
 
 this will give compile time error as fun method cannot be accessed by subclass object
@@ -526,6 +534,7 @@ Static are more towards class level where any change will be reflected to every 
 Volatile is itself reflected for multithreading where all threads will share the latest value of variable
 as the variable resides at main memory.
 
+Real Use Case of Static and volatile::<TBD>
 
 =====================================================
 
@@ -659,6 +668,7 @@ multi-threaded scenarios.
    String str2 = "Prakash";
    str1==str2----> return false as first line creates an object in Heap and second line in string pool
    which has different references and return false
+
 3. if you create two string with new operator have same content then str1==str2 will return false as both
    are having different references
 
