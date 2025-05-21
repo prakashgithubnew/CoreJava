@@ -17,4 +17,10 @@ request and response duration no of request failed and successful.
 Used for distributed logging with the help elastic search,Kibana and logstash
 
 
+**spring-boot-maven-plugin why used?**
+---------------------------------------
+he Spring Boot Maven Plugin provides Spring Boot support in Apache Maven. It allows you to 
+package executable jar or war archives, run Spring Boot applications, generate build information
+and start your Spring Boot application prior to running integration tests.
+
 

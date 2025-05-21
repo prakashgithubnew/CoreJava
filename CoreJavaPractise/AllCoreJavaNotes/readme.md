@@ -22,6 +22,81 @@ private - accessible in the same class
 
 default - accessible in same package but not other package
 
+**Types of Inheritence in Java**
+--------------------------------
+Single Inheritance::
+
+      class Animal {
+      String name;
+      void eat() { System.out.println("Animal is eating"); }
+      }
+      
+      class Dog extends Animal {
+      void bark() { System.out.println("Dog is barking"); }
+      }
+
+Multilevel Inheritance::
+
+      class Animal {
+      String name;
+      void eat() { System.out.println("Animal is eating"); } }
+      
+      class Dog extends Animal {
+      void bark() { System.out.println("Dog is barking"); }
+      }
+      
+      class Puppy extends Dog {
+      void weep() { System.out.println("Puppy is weeping"); }
+      }
+
+Hierarchical Inheritance::
+
+      class Animal {
+      String name;
+      void eat() { System.out.println("Animal is eating"); }
+      }
+      
+      class Dog extends Animal {
+      void bark() { System.out.println("Dog is barking"); }
+      }
+      
+      class Cat extends Animal {
+      void meow() { System.out.println("Cat is meowing"); }
+      }
+
+Multiple Inheritance::
+
+      interface Swimmable {
+      void swim();
+      }
+      
+      interface Flyable {
+      void fly();
+      }
+      
+      class Bird implements Swimmable, Flyable {
+      public void swim() { System.out.println("Bird is swimming"); }
+      public void fly() { System.out.println("Bird is flying"); }
+      }
+
+Hybrid Inheritance::
+
+      class Animal {
+      String name;
+      void eat() { System.out.println("Animal is eating"); }
+      }
+      
+      interface Runable {
+      void run();
+      }
+      
+      class Dog extends Animal implements Runable {
+      public void run() { System.out.println("Dog is running"); }
+      }
+      
+      class Puppy extends Dog {
+      void weep() { System.out.println("Puppy is weeping"); }
+      }
 
 **OOPS Concept in java**
 -------------------------
@@ -101,6 +176,12 @@ Java method can be protected and static both.
         extension
         bootstrap
         system - Class.forName
+
+
+**what does class.forName() do?**
+---------------------------------
+it loads the bytecode of class in the JVM.
+
 
 we should not use the classloader always as this is slower process and it shud be used when 
 specific need.
@@ -363,6 +444,11 @@ Finance
     Hash-based collections (HashMap, HashSet) rely on an object's hashCode. If an object’s state changes after being
     added to a collection, it can lead to inconsistent behavior.
 
+**LinkedHashMap**
+-----------------
+
+LinkedHashMap is used when hashmap is needed to maintain the insertion order.
+
 **How to make the Immutable class in java?**
 -------------------------------------------
     Declare the class final → Prevents subclassing.
@@ -376,14 +462,14 @@ Finance
 
 **what is diamond problem in OOPS**
 ------------------------------------
-        Class A has a method foo().
-        Class B and Class C both extend A and override foo().
-        Class D extends both B and C.
-        The problem arises when calling foo() from an object of Class D, because the JVM doesn't 
-        know whether to call the method from B or C, since both have their own implementations of foo().
+        
+Case 1: Interface A and Interface B has a method foo()
+        MyClass implements both Interface A and Interface B.
+        if you use super.foo(); it will give ambuitity error as whcih method to call is not sure.
+         to void this you can use InterfaceA.super.foo();
 
-        To solve this, Java requires the implementing class to override the conflicting method and 
-        resolve the ambiguity.
+Case 2:
+         Same example for class instead of interface hence 2 class cannot be extended was the solution.
 
 **what is memory leak in java and how it can be prevented?**
 ------------------------------------------------------------
@@ -715,7 +801,7 @@ Prints 4
    t1.start()
    t1.join() - join will ensure t1 gets finished before t2 starts.
    t2.start()
-   t2.join() - once t2 finished then t2 will start
+   t2.join() - once t1 finished then t2 will start
    t3.join()
 
     2. Multithreading can be achieved by 2 ways.Extending the class with Thread and implementing by runnable interface.
@@ -780,7 +866,7 @@ wait, notify and notifyall are object class method where sleep is thread class m
 -----------------------
 Thread can be interrupted by using Thread.interrupt() method.
 Once thread is started by start method the same can be interrupted anytime.
-Interrupts and force thread to stopped
+Interrupts force thread to stopped
 
 **Asynchronous programming**
 --------------------------------------------------
@@ -1059,6 +1145,7 @@ Example below:
 
 **Difference between synchronized block and synchronized method?**
 ------------------------------------------------------------------
+
 1. Both locks the current instance or object of the class but method locks the entire body
    but block locks the particular block only.
 
@@ -1264,7 +1351,6 @@ The objective of java 8 comes with more or less on -
 --------------------------------
 Use and Introduction of new Stream APIs.
 
-
 **Optional Class**
 ------------------
 
@@ -1348,14 +1434,11 @@ BiPredicate works on 2 values
 
 ===============================================Exception Handling===============
 
+Exception Hierarchy in Java
+===========================
 
 ![img_1.png](img_1.png)
 
-
-
-![img_2.png](img_2.png)
-Exception Hierarchy in Java
-===========================
 
 Exception Notes
 
@@ -1753,6 +1836,12 @@ When it should be used
 3. Counting occurrences of elements in a dataset.
 4. Web server request/response tracking.
 
+
+**Difference between Callable and Runnable**
+--------------------------------------------
+Callable and runnable both are used for multithreading environments but
+1. Callable can return values but runnable cannot return values.
+2. Callable may throw exceptions but runnable cannot throw exceptions.
 
 
 

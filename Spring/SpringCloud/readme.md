@@ -8,10 +8,11 @@ load balancing and distributed applications.
 
 **what is the difference between spring cloud and spring boot**
 ---------------------------------------------------------------
-Spring Boot is a Java framework which is used for quicker application development, and is specifically used in Microservice architecture.
+Spring Boot is a Java framework which is used for quicker application development, and is 
+specifically used in Microservice architecture.
 
-Spring cloud is used for integrating these microservices so that they can easily work together in a distributed 
-environment and can communicate with each other.
+Spring cloud is used for integrating these microservices so that they can easily work together 
+in a distributed environment and can communicate with each other.
 
 **There are multiple components in Spring Cloud which supports the cloud native development using spring cloud.**
 -----------------------------------------------------------------------------------------------------------------
@@ -42,25 +43,40 @@ where all instances of services are registered
 service discovery has information of all the services registered in service registry
 
 
-**Building Microservice and service registry/discovery.**
----------------------------------------------------------
-Create Microservice-simple microservice
---------------------
+**Building Microservice and service registry/discovery using eureka library**
+---------------------------------------------------------------------------
+
+1.Create Microservice-simple microservice
+---------------------------------------
 1. Create microservice and add web and eureka client dependency
 2. Have an end point ready.
 3. @EnableDiscoveryClient Annotation in top of main application class
+4. set eureka.client.register-with-eureka = true
 4. Add eureka server URL so that this service can register with eureka server
-eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+5. set eureka-client-fetch-registry=true - This property is set to true because when one service
+   will need to communicate to other service it will look in to registry the port and details 
+   where another service is running and then it can connect to other MS.
+6. set eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 
-After this step 4 when MS will start it will automatically regsiter with eureka server
+After this step 4 when MS will start it will automatically register with eureka server
 
-Create Spring boot application-eureka server
+2.Create Spring boot application-eureka server
 --------------------------------------------
 1. Create spring boot application with netflix eureka server dependency
 2. Add @EnableEurekaServer annotation in main class
 3. set eureka.client.register-with-eureka = false
-4. set eureka-client-fetch-regsitry=false
+4. set eureka-client-fetch-registry=false - this property is set to false for eureka server as 
+   this property tells to fetch registry for service to service communication. 
+    Eureka server is itself a registry so it will not look for registry to communicate service to service.
+    Hence this property is set to false for eureka server.
+    
 5. provide eureka-service-url=<url where eureka server is running>
+
+**Building Microservice API Gateway Pattern**
+---------------------------------------------
+
+
+
 
 
 **Client side discovery and server side discovery**
@@ -69,7 +85,7 @@ CSD
 client will make a query to registry directly to connect with any service.
 
 SSD
-client will make a query to LB to identify the service and connect.LB will check with registry to
+client will make a query to LB to identify the service and connect. LB will check with registry to
 identify the service
 
 **Kafka or RabbitMQ**

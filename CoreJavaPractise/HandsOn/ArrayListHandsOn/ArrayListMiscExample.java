@@ -89,8 +89,12 @@ public class ArrayListMiscExample {
         employees.forEach(System.out::println);
 
         //Grouping by multiple fields
-        Map<String, List<Employee>> multipleFieldsMapList2 = employees.stream().collect(
-                Collectors.groupingBy(Employee::getDesignation));
+
+        Map<String, Map<String, List<Employee>>> multipleFieldsMapList3 = employees.stream()
+                .collect(
+                        Collectors.groupingBy(Employee::getDesignation,
+                                Collectors.groupingBy(Employee::getName)));
+
 
     }
 

@@ -60,7 +60,7 @@ hence the name Inversion Of Control.
 **what is dependency injection in spring**
 ------------------------------------------
 Dependency Injection is a design pattern that allows the spring container to ‘inject’ objects into 
-other objects or dependencies
+other objects or dependencies.
 
 **Features of spring boot framework**
 
@@ -231,8 +231,29 @@ Field Injection - Just autowired annotation before the field
 
     @EnableAutoConfiguration(exclude={className})
 
+**How to load external properties**
+-----------------------------------
+
+@ConfigurationProperties(prefix=""")
+
+
+**what is the use of @Configuration annotation in spring**
+----------------------------------------------------------
+This annotation is used in any class to mark as the source of beans which can be registered in 
+spring context. we usually use @Bean annotations in Configuration class so that spirng context can manage the 
+life cycle of beans.
+
+Also @Bean method used for any Bean will register as singleton bean always rather than creating
+new instance always.
+
+if we don't use @Configuration then a new instance is always created when there is 
+any call to get bean.
+
+if you omit @Configuration annotation then your class will be treated as normal java class.
+singleton behaviour may also break.
 
 **Spring bean scopes**
+-----------------------
     The Types of Bean Scopes in Spring Boot
     Spring Boot supports five primary bean scopes:
     
@@ -1423,3 +1444,53 @@ WebFlux uses a small number of threads to handle many concurrent requests.
 
 
 Spring web-flux uses event stream and event loop model 
+
+
+**How will you fetch 10000 records from DB in rest API , any optimum solution?**
+--------------------------------------------------------------------------------
+
+**Pagination Approach**
+-----------------------
+
+The Solution would be UI can send the index and call will come to API , API will hit the DB and fetch 1000 records
+like below
+
+select * from items order by id LIMIT 1000 OFFSET 0
+
+Next time next link will be clicked to load next 1000 records from DB via REST API.
+Query will be
+select * from items order by id LIMIT 1000 OFFSET 1000
+
+next time
+
+select * from items order by id LIMIT 1000 OFFSET 2000
+
+
+**Using PagingAndSortingRepository Approach of spring data JPA**
+------------------------------------------------------------------
+Repository class
+
+public interface UserPagingRepository extends PagingAndSortingRepository<User, Integer> {
+}
+
+Service class
+
+    public List<User> getUsersByPagination(int pageNo, int pageSize) {
+
+        //create pagerequest object
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize, Sort.by("name").ascending());
+        //pass it to repos
+        Page<User> pagingUser = userRepository.findAll(pageRequest);
+        //pagingUser.hasContent(); -- to check pages are there or not
+
+
+        Sort nameSort = Sort.by("name");
+        Sort emailSort = Sort.by("email");
+
+        Sort multiSort = emailSort.and(nameSort);
+
+        //List<User> result = userRepository.findAll(multiSort);
+
+        //Slice<User> result = userRepository.findByEmail("abcd@gmail.com", paging);
+        return pagingUser.getContent();
+    }

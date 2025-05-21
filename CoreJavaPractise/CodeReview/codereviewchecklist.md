@@ -11,3 +11,7 @@ constants in all caps, variable names in CamelCase, etc.
 
 6. Override hashcode and equals method mandatory for each model.
 
+7. Use proper design pattern to achieve maintainability and reusability in the code.
+
+
+
